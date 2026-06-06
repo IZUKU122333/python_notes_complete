@@ -1,0 +1,2835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Complete Python + NumPy + Pandas - Handwritten Notes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Caveat:wght@400;700&display=swap');
+body{font-family:'Kalam',cursive;background:#fffdf5;color:#2c3e50;font-size:18px;line-height:2.0;margin:0;padding:60px;max-width:950px;margin-left:auto;margin-right:auto;background-image:repeating-linear-gradient(transparent,transparent 35px,#e8d5c4 35px,#e8d5c4 36px);}
+h1{font-family:'Caveat',cursive;font-size:54px;color:#c0392b;text-align:center;margin-bottom:5px;}
+h2{font-family:'Caveat',cursive;font-size:38px;color:#2980b9;border-bottom:3px solid #2980b9;margin-top:60px;padding-bottom:5px;}
+h3{font-family:'Patrick Hand',cursive;font-size:28px;color:#8e44ad;margin-top:35px;}
+h4{font-family:'Patrick Hand',cursive;font-size:22px;color:#27ae60;margin-top:25px;}
+.pycode{display:block;font-family:'Courier New',monospace;white-space:pre-wrap;word-wrap:break-word;background:#f4f1ea;padding:18px;border-left:6px solid #e67e22;border-radius:0 10px 10px 0;font-size:14.5px;line-height:1.6;margin:18px 0;color:#2c3e50;box-shadow:2px 2px 5px rgba(0,0,0,0.08);}
+.output{display:block;background:#e8f8f5;padding:14px;border-left:6px solid #1abc9c;border-radius:0 10px 10px 0;font-size:14.5px;margin:10px 0;color:#16a085;}
+.note{background:#fff9c4;border-left:6px solid #f1c40f;padding:16px;margin:18px 0;border-radius:0 10px 10px 0;font-size:17px;}
+.warn{background:#ffebee;border-left:6px solid #e74c3c;padding:16px;margin:18px 0;border-radius:0 10px 10px 0;font-size:17px;}
+.tip{background:#e8f5e9;border-left:6px solid #27ae60;padding:16px;margin:18px 0;border-radius:0 10px 10px 0;font-size:17px;}
+.analogy{background:#e3f2fd;border-left:6px solid #2196f3;padding:16px;margin:18px 0;border-radius:0 10px 10px 0;font-size:17px;}
+.exercise{background:#f3e5f5;border-left:6px solid #9c27b0;padding:16px;margin:18px 0;border-radius:0 10px 10px 0;font-size:17px;}
+table{width:100%;border-collapse:collapse;margin:18px 0;font-size:16px;box-shadow:2px 2px 5px rgba(0,0,0,0.08);}
+th,td{border:2px solid #bdc3c7;padding:10px 14px;text-align:left;}
+th{background:#ecf0f1;font-weight:700;font-family:'Patrick Hand',cursive;}
+.page-break{page-break-after:always;}
+.project-box{background:#fff3e0;border:3px dashed #ff9800;padding:25px;margin:25px 0;border-radius:15px;}
+.project-title{font-family:'Caveat',cursive;font-size:32px;color:#e65100;margin-bottom:10px;}
+@media print{body{background:white;padding:30px;font-size:15px;line-height:1.8;}h1{font-size:42px;}h2{font-size:32px;}h3{font-size:24px;}.pycode{font-size:12px;}}
+</style>
+</head>
+<body>
+
+<h1>Complete Python + NumPy + Pandas Notes</h1>
+<p style="text-align:center;font-size:24px;font-family:'Caveat',cursive;">From Zero to Hero — For Class 10 & Beginners</p>
+
+<!-- ============================ CHAPTER 0 ============================ -->
+<h2>0. What is Programming? (The Very Beginning)</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> Think of a computer like a very obedient robot. It can do math, remember things, draw pictures, and talk to the internet. But it only understands special instructions called <strong>code</strong>.<br><br>
+Programming is just giving instructions to this robot in a language it understands. Python is one of the easiest languages to learn because it reads almost like English!
+</div>
+
+<h3>Why Python?</h3>
+<ul>
+<li><strong>Easy to read</strong> — `print("Hello")` looks like English</li>
+<li><strong>Used everywhere</strong> — websites, AI, data science, games, apps</li>
+<li><strong>Free</strong> — you don't pay anything</li>
+<li><strong>Huge community</strong> — if you get stuck, someone already solved it</li>
+</ul>
+
+<h3>How to Run Python?</h3>
+<script type="text/plain" class="pycode">
+# Method 1: Online (no install needed)
+# Go to https://www.programiz.com/python-programming/online-compiler/
+# Or https://www.w3schools.com/python/python_compiler.asp
+
+# Method 2: Install on your computer
+# 1. Go to python.org
+# 2. Download Python 3.11 or 3.12
+# 3. Install (check "Add to PATH" on Windows!)
+# 4. Open IDLE or write in Notepad and save as .py file
+</script>
+
+<div class="note">
+<strong>What is a "program"?</strong> A program is a file with instructions saved with a `.py` extension. When you double-click it or run it, Python reads each line from top to bottom and does what you said.
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 1 ============================ -->
+<h2>1. Python Basics (Your First Steps)</h2>
+
+<h3>1.1 The `print()` Function — Talking to the User</h3>
+<p>`print()` is the most basic command. It shows text on the screen.</p>
+
+<script type="text/plain" class="pycode">
+# Example 1: Simple text
+print("Hello World")
+
+# Example 2: Numbers
+print(10)
+print(3.14)
+
+# Example 3: Multiple things
+print("My name is", "Rahul")
+print("I am", 15, "years old")
+
+# Example 4: Custom separator
+print("Apple", "Banana", "Cherry", sep=" -> ")
+# Output: Apple -> Banana -> Cherry
+
+# Example 5: Custom ending (default is new line)
+print("Loading", end="")
+print("...", end="")
+print("Done!")
+# Output: Loading...Done!
+</script>
+<div class="output">Output:
+Hello World
+10
+3.14
+My name is Rahul
+I am 15 years old
+Apple -> Banana -> Cherry
+Loading...Done!</div>
+
+<div class="analogy">
+<strong>Analogy:</strong> `print()` is like writing on a whiteboard with a marker. Whatever you write inside the brackets appears on the board. Text (words) must be inside <strong>quotes</strong> (" " or ' '). Numbers don't need quotes.
+</div>
+
+<h3>1.2 Comments — Notes for Yourself</h3>
+<p>Comments are lines Python ignores. They are only for humans to read.</p>
+<script type="text/plain" class="pycode">
+# This is a single-line comment
+
+"""
+This is a multi-line comment.
+You can write paragraphs here.
+Python ignores everything between the triple quotes.
+"""
+
+print("Hello")  # This comment is after code
+</script>
+<div class="tip">Always write comments! When you come back after 2 weeks, you'll forget what your code does.</div>
+
+<h3>1.3 Basic Math in Python</h3>
+<table>
+<tr><th>Symbol</th><th>Name</th><th>Example</th><th>Result</th></tr>
+<tr><td>+</td><td>Addition</td><td>5 + 3</td><td>8</td></tr>
+<tr><td>-</td><td>Subtraction</td><td>10 - 4</td><td>6</td></tr>
+<tr><td>*</td><td>Multiplication</td><td>6 * 7</td><td>42</td></tr>
+<tr><td>/</td><td>Division</td><td>10 / 4</td><td>2.5</td></tr>
+<tr><td>//</td><td>Floor Division</td><td>10 // 4</td><td>2</td></tr>
+<tr><td>%</td><td>Modulo (Remainder)</td><td>10 % 4</td><td>2</td></tr>
+<tr><td>**</td><td>Power</td><td>2 ** 3</td><td>8</td></tr>
+</table>
+
+<script type="text/plain" class="pycode">
+# Let's try everything!
+print(5 + 3)        # 8
+print(10 - 4)       # 6
+print(6 * 7)        # 42
+print(10 / 4)       # 2.5
+print(10 // 4)      # 2  (cuts off decimal)
+print(10 % 4)       # 2  (remainder of 10/4)
+print(2 ** 3)       # 8  (2 * 2 * 2)
+print(25 ** 0.5)    # 5.0 (square root!)
+
+# BODMAS rule works automatically!
+print(2 + 3 * 4)            # 14 (not 20!)
+print((2 + 3) * 4)          # 20 (brackets first)
+</script>
+
+<div class="note">
+<strong>Modulo (%) is super useful!</strong> It gives the remainder. `10 % 3 = 1` because 10 divided by 3 is 3 remainder 1. We use this to check if a number is even or odd!
+</div>
+
+<script type="text/plain" class="pycode">
+# Check even or odd
+number = 7
+if number % 2 == 0:
+    print(number, "is even")
+else:
+    print(number, "is odd")
+</script>
+
+<div class="page-break"></div>
+
+<h3>1.4 Variables — Boxes to Store Data</h3>
+
+<div class="analogy">
+<strong>Analogy:</strong> Imagine you have a box with a label. You put something inside the box, and whenever you need it, you look at the label. A variable is exactly that — a labeled box in the computer's memory!
+</div>
+
+<script type="text/plain" class="pycode">
+# Creating variables (putting things in boxes)
+name = "Rahul"          # A box labeled 'name' holding text
+age = 15                # A box labeled 'age' holding a number
+height = 5.6            # A box labeled 'height' holding a decimal
+is_student = True       # A box holding True/False
+
+# Using variables
+print(name)
+print(age)
+print("My name is", name, "and I am", age, "years old")
+
+# Changing what's inside the box
+age = 16
+print("Next year I will be", age)
+
+# Putting result of math in a box
+area = 10 * 5
+print("Area of rectangle:", area)
+</script>
+
+<h4>Rules for Naming Variables</h4>
+<ul>
+<li>Must start with a letter or underscore (_)</li>
+<li>Can contain letters, numbers, and underscores</li>
+<li>Cannot use spaces (use underscore instead)</li>
+<li>Case-sensitive: `Age` and `age` are DIFFERENT!</li>
+<li>Cannot use Python's reserved words (print, if, for, while, etc.)</li>
+</ul>
+
+<script type="text/plain" class="pycode">
+# Good names
+student_name = "Amit"
+total_marks = 450
+is_passed = True
+
+# Bad names (don't do this!)
+# 1student = "A"     # starts with number - ERROR!
+# student name = "A" # space in name - ERROR!
+# print = 5          # using reserved word - BAD!
+</script>
+
+<div class="tip">Use descriptive names! `x` is bad. `total_marks` is good. Your future self will thank you.</div>
+
+<h3>1.5 Data Types — What Kind of Thing Is Inside?</h3>
+
+<table>
+<tr><th>Type</th><th>What it holds</th><th>Example</th><th>Can we change it?</th></tr>
+<tr><td>int</td><td>Whole numbers</td><td>10, -5, 0, 999</td><td>No (immutable)</td></tr>
+<tr><td>float</td><td>Decimal numbers</td><td>3.14, -0.5, 2.0</td><td>No</td></tr>
+<tr><td>str</td><td>Text / words</td><td>"Hello", 'A'</td><td>No</td></tr>
+<tr><td>bool</td><td>True or False</td><td>True, False</td><td>No</td></tr>
+<tr><td>None</td><td>Nothing / empty</td><td>None</td><td>No</td></tr>
+</table>
+
+<script type="text/plain" class="pycode">
+# Let's check types!
+print(type(10))         # <class 'int'>
+print(type(3.14))       # <class 'float'>
+print(type("Hello"))    # <class 'str'>
+print(type(True))       # <class 'bool'>
+print(type(None))       # <class 'NoneType'>
+
+# Converting types (type casting)
+print(int("42"))        # 42 (string to integer)
+print(float("3.14"))    # 3.14
+print(str(100))         # "100" (number to string)
+print(bool(0))          # False (0 is false)
+print(bool(1))          # True (any non-zero is true)
+print(bool(""))         # False (empty string is false)
+print(bool("Hello"))    # True (non-empty is true)
+</script>
+
+<div class="warn">If you try `int("hello")`, Python will crash with an error! You can only convert things that make sense.</div>
+
+<h3>1.6 The `input()` Function — Asking the User</h3>
+
+<div class="analogy">
+<strong>Analogy:</strong> `input()` is like a teacher asking a question in class. The program stops, waits for the student to type an answer, and then remembers what was typed.
+</div>
+
+<script type="text/plain" class="pycode">
+# Example 1: Simple input
+name = input("What is your name? ")
+print("Hello", name, "!")
+
+# Example 2: Input is ALWAYS a string!
+age = input("Enter your age: ")
+print(type(age))        # <class 'str'> even if you type 15!
+
+# Example 3: Convert to number
+age = int(input("Enter your age: "))
+print("Next year you will be", age + 1)
+
+# Example 4: Calculator with input
+num1 = float(input("Enter first number: "))
+num2 = float(input("Enter second number: "))
+print("Sum:", num1 + num2)
+print("Difference:", num1 - num2)
+print("Product:", num1 * num2)
+print("Quotient:", num1 / num2)
+</script>
+
+<div class="exercise">
+<strong>Try This Yourself:</strong> Write a program that asks for the length and width of a rectangle, then calculates and prints the area and perimeter.
+</div>
+
+<div class="page-break"></div>
+
+<h3>1.7 f-strings (The Modern Way to Combine Text)</h3>
+
+<p>Before f-strings, combining text and variables was messy. f-strings make it beautiful!</p>
+
+<script type="text/plain" class="pycode">
+name = "Priya"
+age = 15
+marks = 87.5
+
+# Old way (confusing!)
+print("Hello, my name is " + name + " and I am " + str(age) + " years old.")
+
+# f-string way (put 'f' before quotes, put variables inside curly braces!)
+print(f"Hello, my name is {name} and I am {age} years old.")
+print(f"I scored {marks} in Science.")
+print(f"Next year I will be {age + 1}.")
+
+# Formatting numbers
+pi = 3.14159265
+print(f"Pi = {pi:.2f}")           # 3.14 (2 decimal places)
+print(f"Pi = {pi:.4f}")           # 3.1416 (4 decimal places)
+
+money = 1500
+print(f"Price: Rs.{money:,}")     # Rs.1,500 (comma separator)
+
+percent = 0.8567
+print(f"Percentage: {percent:.1%}")  # 85.7%
+</script>
+
+<div class="tip">Always use f-strings! They are the easiest, fastest, and most readable way to combine text and data in Python.</div>
+
+<h3>1.8 Escape Characters — Special Symbols in Text</h3>
+
+<script type="text/plain" class="pycode">
+# \n = new line
+print("Line 1\nLine 2\nLine 3")
+
+# \t = tab (4 spaces)
+print("Name:\tRahul\nAge:\t15")
+
+# \" = quote inside quotes
+print('He said, "Hello!"')
+print("She said, \"Hi!\"")
+
+# \\ = actual backslash
+print("Path: C:\\Users\\Rahul")
+
+# Raw strings (ignore escape characters)
+print(r"C:\Users\Rahul")   # Same result, no need for \\
+</script>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 2 ============================ -->
+<h2>2. Control Flow — Making Decisions</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> In real life, you make decisions every day. "If it rains, I will take an umbrella. Otherwise, I will wear a cap." Python can make decisions too using `if`, `elif`, and `else`.
+</div>
+
+<h3>2.1 if-else (Binary Decision)</h3>
+
+<script type="text/plain" class="pycode">
+# Example 1: Simple if
+age = 18
+if age >= 18:
+    print("You can vote!")
+
+# Example 2: if-else
+marks = 45
+if marks >= 40:
+    print("You passed!")
+else:
+    print("You failed. Try again!")
+
+# Example 3: if-elif-else (multiple conditions)
+marks = 72
+if marks >= 90:
+    print("Grade: A+")
+elif marks >= 80:
+    print("Grade: A")
+elif marks >= 70:
+    print("Grade: B")
+elif marks >= 60:
+    print("Grade: C")
+elif marks >= 50:
+    print("Grade: D")
+else:
+    print("Grade: F (Fail)")
+</script>
+
+<div class="note">
+<strong>Important:</strong> Python uses <strong>indentation</strong> (spaces at the beginning of a line) to know what belongs to the `if`. If you don't indent properly, Python gets confused and shows an error!
+</div>
+
+<script type="text/plain" class="pycode">
+# WRONG! (IndentationError)
+if age > 10:
+print("You are older than 10")   # Error! Must be indented!
+
+# CORRECT!
+if age > 10:
+    print("You are older than 10")  # 4 spaces (or 1 Tab in IDLE)
+</script>
+
+<h3>2.2 Comparison Operators</h3>
+<table>
+<tr><th>Operator</th><th>Meaning</th><th>Example</th><th>Result</th></tr>
+<tr><td>==</td><td>Equal to</td><td>5 == 5</td><td>True</td></tr>
+<tr><td>!=</td><td>Not equal to</td><td>5 != 3</td><td>True</td></tr>
+<tr><td>></td><td>Greater than</td><td>5 > 3</td><td>True</td></tr>
+<tr><td><</td><td>Less than</td><td>5 < 3</td><td>False</td></tr>
+<tr><td>>=</td><td>Greater than or equal</td><td>5 >= 5</td><td>True</td></tr>
+<tr><td><=</td><td>Less than or equal</td><td>5 <= 3</td><td>False</td></tr>
+</table>
+
+<div class="warn">`=` is for assignment (putting value in a box). `==` is for comparison (checking if two things are equal). Don't mix them up!</div>
+
+<h3>2.3 Logical Operators (and, or, not)</h3>
+
+<script type="text/plain" class="pycode">
+# AND: Both must be True
+age = 20
+has_id = True
+if age >= 18 and has_id:
+    print("You can enter the club!")
+
+# OR: At least one must be True
+is_weekend = True
+is_holiday = False
+if is_weekend or is_holiday:
+    print("No school today!")
+
+# NOT: Flips True to False and vice versa
+is_raining = False
+if not is_raining:
+    print("Let's play outside!")
+
+# Combining all three
+marks = 85
+attendance = 78
+if marks >= 80 and attendance >= 75:
+    print("Eligible for scholarship!")
+elif marks >= 80 or attendance >= 90:
+    print("Eligible for sports quota!")
+else:
+    print("Not eligible.")
+</script>
+
+<h3>2.4 Nested if (if inside if)</h3>
+
+<script type="text/plain" class="pycode">
+# Nested if: decisions inside decisions
+age = 16
+has_license = True
+
+if age >= 18:
+    if has_license:
+        print("You can drive!")
+    else:
+        print("Get a license first!")
+else:
+    print("You are too young to drive.")
+
+# Same thing using 'and' (cleaner!)
+if age >= 18 and has_license:
+    print("You can drive!")
+</script>
+
+<div class="tip">Whenever possible, use `and`/`or` instead of nested if. It makes your code cleaner and easier to read.</div>
+
+<h3>2.5 Ternary Operator (Short if-else)</h3>
+
+<script type="text/plain" class="pycode">
+# Normal way
+marks = 65
+if marks >= 40:
+    result = "Pass"
+else:
+    result = "Fail"
+
+# Ternary way (one line!)
+result = "Pass" if marks >= 40 else "Fail"
+print(result)
+
+# Another example
+a = 10
+b = 20
+maximum = a if a > b else b
+print(f"Maximum is {maximum}")
+</script>
+
+<div class="page-break"></div>
+
+<h3>2.6 for Loop (Doing Something Many Times)</h3>
+
+<div class="analogy">
+<strong>Analogy:</strong> A `for` loop is like a teacher calling attendance. The teacher goes through the list one by one: "Rahul?", "Priya?", "Amit?" — same action, different names each time.
+</div>
+
+<script type="text/plain" class="pycode">
+# Example 1: Count from 0 to 4
+for i in range(5):
+    print(i)
+# Output: 0, 1, 2, 3, 4
+
+# Example 2: Count from 1 to 10
+for i in range(1, 11):
+    print(i)
+
+# Example 3: Count by 2s (even numbers)
+for i in range(0, 11, 2):
+    print(i)
+# Output: 0, 2, 4, 6, 8, 10
+
+# Example 4: Count backwards
+for i in range(10, 0, -1):
+    print(i)
+# Output: 10, 9, 8, ... 1
+
+# Example 5: Loop through a list
+fruits = ["Apple", "Banana", "Cherry", "Date"]
+for fruit in fruits:
+    print(f"I like {fruit}")
+
+# Example 6: Loop through a string
+for letter in "Python":
+    print(letter)
+
+# Example 7: Multiplication table
+num = 5
+for i in range(1, 11):
+    print(f"{num} x {i} = {num * i}")
+
+# Example 8: Sum of first 100 numbers
+total = 0
+for i in range(1, 101):
+    total = total + i
+print(f"Sum of 1 to 100 = {total}")
+# Better way: print(sum(range(1, 101)))
+</script>
+
+<h3>2.7 while Loop (Loop Until Condition is False)</h3>
+
+<div class="analogy">
+<strong>Analogy:</strong> A `while` loop is like a mother saying "Keep eating until your plate is empty." You don't know how many bites it will take — you just keep going <strong>while</strong> the condition is true.
+</div>
+
+<script type="text/plain" class="pycode">
+# Example 1: Count down
+count = 5
+while count > 0:
+    print(count)
+    count = count - 1
+print("Blast off!")
+
+# Example 2: Get password until correct
+password = ""
+while password != "secret":
+    password = input("Enter password: ")
+print("Access granted!")
+
+# Example 3: Sum numbers until user says stop
+total = 0
+while True:
+    num = input("Enter a number (or 'stop' to finish): ")
+    if num == "stop":
+        break
+    total = total + int(num)
+print(f"Total sum: {total}")
+</script>
+
+<div class="warn">
+<strong>Infinite Loop Warning!</strong> If you forget to change the variable in a `while` loop, it will run forever! Always make sure the condition will eventually become `False`.
+</div>
+
+<h3>2.8 break, continue, and pass</h3>
+
+<script type="text/plain" class="pycode">
+# break = STOP the loop completely
+for i in range(1, 100):
+    if i == 7:
+        break      # Stop immediately when i is 7
+    print(i)
+# Output: 1, 2, 3, 4, 5, 6
+
+# continue = SKIP this round and go to next
+for i in range(1, 10):
+    if i == 5:
+        continue   # Skip 5, don't print it
+    print(i)
+# Output: 1, 2, 3, 4, 6, 7, 8, 9
+
+# pass = do nothing (placeholder)
+for i in range(5):
+    pass           # I'll write code here later
+</script>
+
+<div class="analogy">
+<strong>Analogy:</strong> `break` = a fire alarm (everyone stops and leaves). `continue` = a teacher skipping a student who is absent (moves to next one). `pass` = an empty chair saved for someone who hasn't arrived yet.
+</div>
+
+<h3>2.9 else with Loops</h3>
+
+<script type="text/plain" class="pycode">
+# The 'else' runs if the loop finished normally (without break)
+for i in range(5):
+    print(i)
+else:
+    print("Loop finished successfully!")
+
+# If break happens, else is skipped!
+for i in range(5):
+    if i == 3:
+        break
+    print(i)
+else:
+    print("This won't print!")
+</script>
+
+<div class="page-break"></div>
+
+<h3>2.10 List Comprehensions (Loops in One Line!)</h3>
+
+<script type="text/plain" class="pycode">
+# Normal way: squares of 0-9
+squares = []
+for x in range(10):
+    squares.append(x ** 2)
+print(squares)
+
+# List comprehension (same result, one line!)
+squares = [x ** 2 for x in range(10)]
+print(squares)
+
+# With condition: only even squares
+evens = [x ** 2 for x in range(10) if x % 2 == 0]
+print(evens)  # [0, 4, 16, 36, 64]
+
+# Dictionary comprehension
+squares_dict = {x: x ** 2 for x in range(5)}
+print(squares_dict)  # {0: 0, 1: 1, 2: 4, 3: 9, 4: 16}
+
+# Set comprehension (no duplicates!)
+unique = {x % 3 for x in range(20)}
+print(unique)  # {0, 1, 2}
+</script>
+
+<div class="tip">List comprehensions are faster and more "Pythonic" than normal loops. Learn to use them!</div>
+
+<div class="exercise">
+<strong>Exercise:</strong> Write a list comprehension that creates a list of all numbers from 1 to 50 that are divisible by both 3 and 5.
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 3 ============================ -->
+<h2>3. Data Structures — Organizing Information</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> A single variable is like a pocket. You can hold one thing. But what if you need to carry your books, lunch, water bottle, and pencil? You need a <strong>bag</strong>! In Python, bags are called <strong>data structures</strong>.
+</div>
+
+<h3>3.1 List — An Ordered Bag (Mutable)</h3>
+
+<p>A list is like a numbered list in your notebook. Items stay in order, and you can add, remove, or change items anytime.</p>
+
+<script type="text/plain" class="pycode">
+# Creating lists
+fruits = ["Apple", "Banana", "Cherry"]
+numbers = [10, 20, 30, 40, 50]
+mixed = [1, "Hello", 3.14, True]        # Can mix types!
+empty = []
+
+# Accessing items (index starts at 0!)
+print(fruits[0])        # Apple (first item)
+print(fruits[1])        # Banana (second item)
+print(fruits[-1])       # Cherry (last item)
+print(fruits[-2])       # Banana (second from last)
+
+# Slicing (getting a piece of the list)
+numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+print(numbers[2:5])     # [2, 3, 4] (index 2 to 4, 5 is excluded!)
+print(numbers[:4])      # [0, 1, 2, 3] (from start to 3)
+print(numbers[6:])       # [6, 7, 8, 9] (from 6 to end)
+print(numbers[::2])      # [0, 2, 4, 6, 8] (every 2nd item)
+print(numbers[::-1])     # [9, 8, 7, ... 0] (reversed!)
+
+# Changing items
+fruits[1] = "Blueberry"
+print(fruits)           # ['Apple', 'Blueberry', 'Cherry']
+
+# Adding items
+fruits.append("Date")           # Add at end
+fruits.insert(1, "Apricot")     # Add at position 1
+fruits.extend(["Elderberry", "Fig"])  # Add multiple items
+
+# Removing items
+fruits.remove("Apple")          # Remove by value
+popped = fruits.pop()           # Remove and return last item
+popped = fruits.pop(1)         # Remove and return item at index 1
+
+# Finding items
+print(fruits.index("Cherry"))   # Where is "Cherry"?
+print(fruits.count("Cherry"))   # How many "Cherry"?
+
+# Sorting and reversing
+nums = [3, 1, 4, 1, 5, 9, 2]
+nums.sort()                     # Sort in place (smallest to largest)
+print(nums)
+nums.sort(reverse=True)         # Sort in place (largest to smallest)
+print(nums)
+nums.reverse()                  # Flip the order
+
+# Other methods
+print(len(fruits))              # How many items?
+print(max(nums))                # Largest number
+print(min(nums))                # Smallest number
+print(sum(nums))                # Total
+</script>
+
+<div class="note">
+<strong>Index starts at 0!</strong> This confuses every beginner. The first item is at position 0, not 1. Think of it as "how many steps from the beginning?" 0 steps = first item, 1 step = second item.
+</div>
+
+<h3>3.2 List Deep Dive (2D Lists, Nested Lists)</h3>
+
+<script type="text/plain" class="pycode">
+# 2D List (like a table with rows and columns)
+matrix = [
+    [1, 2, 3],      # Row 0
+    [4, 5, 6],      # Row 1
+    [7, 8, 9]       # Row 2
+]
+
+print(matrix[0])        # [1, 2, 3] (first row)
+print(matrix[1][2])     # 6 (row 1, column 2)
+print(matrix[2][0])     # 7 (row 2, column 0)
+
+# Printing a 2D list nicely
+for row in matrix:
+    for num in row:
+        print(num, end=" ")
+    print()
+
+# Correct way to create a 2D list
+rows, cols = 3, 3
+table = [[0 for _ in range(cols)] for _ in range(rows)]
+# NOT: [[0]*cols]*rows (this creates copies of the same row!)
+</script>
+
+<div class="warn">
+<strong>WRONG way to make 2D list:</strong> `[[0]*3]*3` creates 3 copies of the SAME inner list. If you change one row, all rows change! Always use the list comprehension way above.
+</div>
+
+<h3>3.3 Tuple — An Ordered Bag (Immutable)</h3>
+
+<div class="analogy">
+<strong>Analogy:</strong> A tuple is like a sealed packet of chips. You can see what's inside, but you cannot add, remove, or change anything once it's sealed.
+</div>
+
+<script type="text/plain" class="pycode">
+# Creating tuples
+coordinates = (10, 20)
+colors = ("Red", "Green", "Blue")
+single = (5,)          # Comma is required for single item!
+
+# Accessing (same as list)
+print(coordinates[0])   # 10
+print(colors[-1])       # Blue
+
+# Unpacking (very useful!)
+x, y = coordinates
+print(x, y)             # 10 20
+
+# Swapping values (no temporary variable needed!)
+a = 5
+b = 10
+a, b = b, a             # Python magic!
+print(a, b)             # 10 5
+
+# Tuples as dictionary keys (because they are immutable!)
+locations = {
+    (0, 0): "Origin",
+    (10, 20): "School",
+    (30, 40): "Home"
+}
+print(locations[(10, 20)])
+</script>
+
+<div class="tip">Use tuples when data should NOT change (like coordinates, RGB colors, dates). Use lists when data will change.</div>
+
+<h3>3.4 Dictionary — A Labeled Bag (Key-Value Pairs)</h3>
+
+<div class="analogy">
+<strong>Analogy:</strong> A dictionary is like a real dictionary. You look up a <strong>word</strong> (key) and find its <strong>meaning</strong> (value). Or like a phone book: name → phone number.
+</div>
+
+<script type="text/plain" class="pycode">
+# Creating dictionaries
+student = {
+    "name": "Rahul",
+    "age": 15,
+    "class": 10,
+    "marks": 85
+}
+
+# Accessing values
+print(student["name"])       # Rahul
+print(student.get("age"))    # 15
+print(student.get("salary")) # None (key doesn't exist, no crash!)
+print(student.get("salary", 0))  # 0 (default value if missing)
+
+# Adding and changing
+student["school"] = "DAV"
+student["marks"] = 90
+
+# Removing
+student.pop("age")           # Remove and return
+last = student.popitem()     # Remove last added item
+
+# Checking if key exists
+if "name" in student:
+    print("Name is present!")
+
+# Looping through dictionary
+for key in student:
+    print(f"{key}: {student[key]}")
+
+# Better way (using .items())
+for key, value in student.items():
+    print(f"{key} = {value}")
+
+# Getting all keys and values
+print(student.keys())        # dict_keys(['name', 'class', 'marks', 'school'])
+print(student.values())      # dict_values(['Rahul', 10, 90, 'DAV'])
+
+# Updating with another dictionary
+extra = {"city": "Delhi", "hobby": "Cricket"}
+student.update(extra)
+</script>
+
+<h3>3.5 Set — A Bag with No Duplicates (Unordered)</h3>
+
+<div class="analogy">
+<strong>Analogy:</strong> A set is like a bag of unique marbles. If you try to put a red marble twice, the bag still has only one red marble. Also, sets have no order — you can't say "first" or "second" item.
+</div>
+
+<script type="text/plain" class="pycode">
+# Creating sets
+numbers = {1, 2, 3, 3, 3, 4}
+print(numbers)              # {1, 2, 3, 4} (duplicates removed!)
+
+# From a list
+numbers = set([1, 2, 2, 3, 3, 3, 4])
+print(numbers)              # {1, 2, 3, 4}
+
+# Adding and removing
+numbers.add(5)
+numbers.remove(2)            # Error if not present
+numbers.discard(2)         # No error if not present
+numbers.pop()                # Remove random item
+
+# Set operations
+a = {1, 2, 3, 4}
+b = {3, 4, 5, 6}
+
+print(a | b)               # Union: {1, 2, 3, 4, 5, 6}
+print(a & b)               # Intersection: {3, 4}
+print(a - b)               # Difference: {1, 2}
+print(a ^ b)               # Symmetric diff: {1, 2, 5, 6}
+print(a < b)               # Is a subset of b? False
+
+# Set comprehension
+evens = {x for x in range(20) if x % 2 == 0}
+print(evens)
+</script>
+
+<div class="tip">Sets are super fast for checking membership! `if "apple" in fruits_set` is much faster than `if "apple" in fruits_list` when the list is huge.</div>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 4 ============================ -->
+<h2>4. Strings — Working with Text</h2>
+
+<p>Strings are one of the most used data types. A string is just a sequence of characters inside quotes.</p>
+
+<script type="text/plain" class="pycode">
+# Creating strings
+text = "Hello World"
+multiline = """This is
+a multiline
+string"""
+
+# Indexing (same as lists!)
+print(text[0])          # H
+print(text[-1])         # d
+print(text[0:5])        # Hello
+print(text[6:])         # World
+print(text[::-1])       # dlroW olleH (reversed!)
+
+# String methods (strings are immutable!)
+text = "  Hello World  "
+print(text.upper())              # HELLO WORLD
+print(text.lower())              # hello world
+print(text.strip())              # Hello World (no spaces)
+print(text.replace("World", "Python"))  # Hello Python
+print(text.find("lo"))             # 4 (position of "lo")
+print(text.count("l"))             # 3 (how many "l")
+print(text.startswith("  He"))     # True
+print(text.endswith("ld  "))      # True
+
+# Splitting and joining
+sentence = "Apple,Banana,Cherry"
+fruits = sentence.split(",")     # ['Apple', 'Banana', 'Cherry']
+joined = " - ".join(fruits)       # Apple - Banana - Cherry
+
+# Checking properties
+print("123".isdigit())             # True
+print("abc".isalpha())            # True
+print("abc123".isalnum())         # True
+print("   ".isspace())            # True
+print("Hello".istitle())          # True
+
+# Formatting with f-strings (already covered, but more examples)
+name = "Rahul"
+marks = 87.666
+print(f"Name: {name:>10}")       # Right-aligned in 10 spaces
+print(f"Marks: {marks:.1f}")     # 87.7
+print(f"Binary: {5:08b}")         # 00000101
+print(f"Hex: {255:02x}")          # ff
+</script>
+
+<div class="note">
+<strong>Strings are immutable!</strong> You cannot change a string in place. `text[0] = "h"` will crash. You must create a new string: `text = text.replace("H", "h")`.
+</div>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 5 ============================ -->
+<h2>5. Functions — Reusable Code Blocks</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> A function is like a recipe. You write the recipe once (the function), and whenever you want that dish, you just follow the recipe. You don't rewrite the recipe every time!
+</div>
+
+<h3>5.1 Defining Simple Functions</h3>
+
+<script type="text/plain" class="pycode">
+# Simple function with no inputs
+def say_hello():
+    print("Hello!")
+
+say_hello()          # Call the function
+say_hello()          # Call it again!
+
+# Function with input (parameter)
+def greet(name):
+    print(f"Hello, {name}!")
+
+greet("Rahul")
+greet("Priya")
+
+# Function with multiple inputs
+def add_numbers(a, b):
+    result = a + b
+    print(f"{a} + {b} = {result}")
+
+add_numbers(5, 3)
+add_numbers(100, 200)
+
+# Function that returns a value
+def multiply(a, b):
+    return a * b
+
+answer = multiply(4, 5)
+print(answer)        # 20
+</script>
+
+<h3>5.2 Default Parameters</h3>
+
+<script type="text/plain" class="pycode">
+def greet(name, greeting="Hello"):
+    print(f"{greeting}, {name}!")
+
+greet("Rahul")                  # Hello, Rahul!
+greet("Rahul", "Good morning")  # Good morning, Rahul!
+</script>
+
+<h3>5.3 *args and **kwargs</h3>
+
+<script type="text/plain" class="pycode">
+# *args = any number of positional arguments
+def total_sum(*numbers):
+    result = 0
+    for num in numbers:
+        result += num
+    return result
+
+print(total_sum(1, 2, 3))       # 6
+print(total_sum(10, 20, 30, 40, 50))  # 150
+
+# **kwargs = any number of named arguments
+def student_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+student_info(name="Rahul", age=15, city="Delhi")
+
+# Combining everything
+def demo(a, b, c=10, *args, **kwargs):
+    print(f"a={a}, b={b}, c={c}")
+    print(f"args={args}")
+    print(f"kwargs={kwargs}")
+
+demo(1, 2, 3, 4, 5, x=10, y=20)
+</script>
+
+<h3>5.4 Lambda Functions (One-line Functions)</h3>
+
+<script type="text/plain" class="pycode">
+# Normal function
+def square(x):
+    return x ** 2
+
+# Lambda function (same thing, one line)
+square = lambda x: x ** 2
+
+print(square(5))        # 25
+
+# Using with map()
+numbers = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x ** 2, numbers))
+print(squared)          # [1, 4, 9, 16, 25]
+
+# Using with filter()
+evens = list(filter(lambda x: x % 2 == 0, numbers))
+print(evens)            # [2, 4]
+
+# Using with sorted()
+students = [("Rahul", 85), ("Priya", 92), ("Amit", 78)]
+sorted_by_marks = sorted(students, key=lambda x: x[1], reverse=True)
+print(sorted_by_marks)  # [('Priya', 92), ('Rahul', 85), ('Amit', 78)]
+</script>
+
+<div class="tip">Lambda functions are perfect for small, throw-away functions. For complex logic, use a normal `def` function with a name.</div>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 6 ============================ -->
+<h2>6. File Handling — Saving and Reading Data</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> Reading and writing files is like using a notebook. `open()` is like picking up a pen. `write()` is writing on the page. `read()` is reading what you wrote. `close()` is putting the pen down. The `with` statement is like an automatic pen cap — it closes the notebook for you so you don't forget!
+</div>
+
+<h3>6.1 Writing to a File</h3>
+
+<script type="text/plain" class="pycode">
+# Method 1: Manual (don't forget to close!)
+file = open("my_notes.txt", "w")   # "w" = write mode
+file.write("Hello, this is my first file!\n")
+file.write("Python is fun.\n")
+file.close()
+
+# Method 2: Using with (automatically closes!)
+with open("my_notes.txt", "w") as file:
+    file.write("Hello, this is my first file!\n")
+    file.write("Python is fun.\n")
+# File is automatically closed here!
+
+# Appending (adding to existing file)
+with open("my_notes.txt", "a") as file:
+    file.write("This is added at the end.\n")
+</script>
+
+<div class="warn">If you use `"w"` mode on an existing file, it DELETES everything inside! Use `"a"` to append or `"r"` to read only.</div>
+
+<h3>6.2 Reading from a File</h3>
+
+<script type="text/plain" class="pycode">
+# Read entire file at once
+with open("my_notes.txt", "r") as file:
+    content = file.read()
+    print(content)
+
+# Read line by line
+with open("my_notes.txt", "r") as file:
+    for line in file:
+        print(line.strip())   # strip removes the \n at the end
+
+# Read all lines into a list
+with open("my_notes.txt", "r") as file:
+    lines = file.readlines()
+    print(lines)              # ['Hello...\n', 'Python...\n', ...]
+</script>
+
+<h3>6.3 Working with JSON (Structured Data)</h3>
+
+<script type="text/plain" class="pycode">
+import json
+
+# Python dictionary
+data = {
+    "name": "Rahul",
+    "age": 15,
+    "subjects": ["Math", "Science", "English"],
+    "marks": {"Math": 95, "Science": 88, "English": 92}
+}
+
+# Save to JSON file
+with open("student.json", "w") as file:
+    json.dump(data, file, indent=2)
+
+# Load from JSON file
+with open("student.json", "r") as file:
+    loaded = json.load(file)
+    print(loaded["name"])
+    print(loaded["marks"]["Math"])
+
+# Convert to string (for sending over internet, etc.)
+text = json.dumps(data)
+obj = json.loads(text)
+</script>
+
+<h3>6.4 Working with CSV (Spreadsheet Data)</h3>
+
+<script type="text/plain" class="pycode">
+import csv
+
+# Writing CSV
+students = [
+    ["Name", "Math", "Science", "English"],
+    ["Rahul", 95, 88, 92],
+    ["Priya", 92, 95, 90],
+    ["Amit", 78, 85, 88]
+]
+
+with open("marks.csv", "w", newline="") as file:
+    writer = csv.writer(file)
+    writer.writerows(students)
+
+# Reading CSV
+with open("marks.csv", "r") as file:
+    reader = csv.reader(file)
+    for row in reader:
+        print(row)
+
+# Using DictReader (each row is a dictionary!)
+with open("marks.csv", "r") as file:
+    reader = csv.DictReader(file)
+    for row in reader:
+        print(f"{row['Name']}: Math={row['Math']}")
+</script>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 7 ============================ -->
+<h2>7. Error Handling — When Things Go Wrong</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> Error handling is like wearing a seatbelt. Most of the time you don't need it, but when something goes wrong, it saves you from crashing! In Python, we use `try` and `except` as our seatbelt.
+</div>
+
+<h3>7.1 Basic try-except</h3>
+
+<script type="text/plain" class="pycode">
+# Example 1: Divide by zero
+num = 10
+den = 0
+
+try:
+    result = num / den
+    print(result)
+except ZeroDivisionError:
+    print("Error: Cannot divide by zero!")
+
+# Example 2: Invalid input
+try:
+    age = int(input("Enter your age: "))
+    print(f"You are {age} years old.")
+except ValueError:
+    print("Error: Please enter a valid number!")
+
+# Example 3: File not found
+try:
+    with open("missing_file.txt", "r") as file:
+        content = file.read()
+except FileNotFoundError:
+    print("Error: File does not exist!")
+</script>
+
+<h3>7.2 Handling Multiple Errors</h3>
+
+<script type="text/plain" class="pycode">
+try:
+    num = int(input("Enter a number: "))
+    result = 100 / num
+    print(f"100 / {num} = {result}")
+except ValueError:
+    print("That's not a number!")
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+except Exception as e:
+    print(f"Something unexpected happened: {e}")
+</script>
+
+<h3>7.3 else and finally</h3>
+
+<script type="text/plain" class="pycode">
+try:
+    num = int(input("Enter a number: "))
+    result = 100 / num
+except ValueError:
+    print("Invalid input!")
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+else:
+    # Runs ONLY if no exception occurred
+    print(f"Success! Result: {result}")
+finally:
+    # Runs ALWAYS (even if exception happened!)
+    print("Program finished.")
+</script>
+
+<div class="tip">`finally` is perfect for cleanup — closing files, disconnecting from internet, saving temporary data, etc.</div>
+
+<h3>7.4 Raising Your Own Errors</h3>
+
+<script type="text/plain" class="pycode">
+def withdraw(balance, amount):
+    if amount < 0:
+        raise ValueError("Amount cannot be negative!")
+    if amount > balance:
+        raise ValueError("Insufficient balance!")
+    return balance - amount
+
+try:
+    new_balance = withdraw(1000, 5000)
+except ValueError as e:
+    print(f"Transaction failed: {e}")
+</script>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 8 ============================ -->
+<h2>8. Object-Oriented Programming (OOP)</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> In real life, everything is an <strong>object</strong>. A car has color, speed, and brand (attributes). It can drive, honk, and stop (actions). In OOP, we create a <strong>blueprint</strong> (class) for cars, and then make individual cars (objects) from that blueprint.
+</div>
+
+<h3>8.1 Classes and Objects</h3>
+
+<script type="text/plain" class="pycode">
+# Creating a class (blueprint)
+class Dog:
+    # Class attribute (shared by all dogs)
+    species = "Canis familiaris"
+    
+    # __init__ is the constructor (runs when object is created)
+    def __init__(self, name, age):
+        self.name = name      # Instance attribute
+        self.age = age        # Instance attribute
+    
+    # Method (action the dog can do)
+    def bark(self):
+        print(f"{self.name} says: Woof woof!")
+    
+    def describe(self):
+        print(f"{self.name} is {self.age} years old.")
+
+# Creating objects (individual dogs)
+dog1 = Dog("Buddy", 3)
+dog2 = Dog("Max", 5)
+
+# Using the objects
+print(dog1.name)       # Buddy
+dog1.bark()            # Buddy says: Woof woof!
+dog1.describe()        # Buddy is 3 years old.
+
+print(dog2.name)       # Max
+dog2.bark()            # Max says: Woof woof!
+</script>
+
+<div class="note">
+<strong>`self` is confusing at first!</strong> `self` refers to the specific object calling the method. When you write `dog1.bark()`, Python secretly passes `dog1` as `self`. You don't write `self` when calling — only when defining!
+</div>
+
+<h3>8.2 Inheritance (Child Classes)</h3>
+
+<script type="text/plain" class="pycode">
+# Parent class
+class Animal:
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        raise NotImplementedError("Subclass must implement this!")
+
+# Child classes
+class Cat(Animal):
+    def speak(self):
+        return f"{self.name} says Meow!"
+
+class Dog(Animal):
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+class Cow(Animal):
+    def speak(self):
+        return f"{self.name} says Moo!"
+
+# Using them
+animals = [Cat("Kitty"), Dog("Buddy"), Cow("Bessie")]
+for animal in animals:
+    print(animal.speak())
+</script>
+
+<h3>8.3 Encapsulation (Private Data)</h3>
+
+<script type="text/plain" class="pycode">
+class BankAccount:
+    def __init__(self, owner, balance):
+        self.owner = owner
+        self.__balance = balance      # __ means "private"
+    
+    def deposit(self, amount):
+        if amount > 0:
+            self.__balance += amount
+            print(f"Deposited Rs.{amount}")
+    
+    def withdraw(self, amount):
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f"Withdrew Rs.{amount}")
+        else:
+            print("Insufficient funds!")
+    
+    def get_balance(self):
+        return self.__balance
+
+account = BankAccount("Rahul", 1000)
+account.deposit(500)
+account.withdraw(200)
+print(f"Balance: Rs.{account.get_balance()}")
+# print(account.__balance)  # ERROR! Cannot access directly
+</script>
+
+<div class="tip">`__balance` is "name-mangled" to `_BankAccount__balance`. It is technically possible to access it, but it's a signal that you should NOT touch it directly. This is called encapsulation.</div>
+
+<h3>8.4 Properties (Smart Attributes)</h3>
+
+<script type="text/plain" class="pycode">
+class Temperature:
+    def __init__(self, celsius):
+        self._celsius = celsius
+    
+    @property
+    def celsius(self):
+        return self._celsius
+    
+    @celsius.setter
+    def celsius(self, value):
+        if value < -273.15:
+            raise ValueError("Too cold! Absolute zero is -273.15C")
+        self._celsius = value
+    
+    @property
+    def fahrenheit(self):
+        return self._celsius * 9/5 + 32
+
+t = Temperature(25)
+print(t.celsius)        # 25
+print(t.fahrenheit)     # 77.0
+t.celsius = 100
+print(t.fahrenheit)     # 212.0
+</script>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 9 ============================ -->
+<h2>9. NumPy — Super-Powered Arrays</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> A Python list is like a backpack — you can put anything in it (books, water, shoes), but it's messy and slow. A NumPy array is like a military ammunition box — everything is the same type, perfectly organized, and you can grab 100 items at once!
+</div>
+
+<h3>9.1 Why NumPy?</h3>
+<ul>
+<li><strong>Fast:</strong> 10x to 100x faster than Python lists</li>
+<li><strong>Memory efficient:</strong> Uses less RAM</li>
+<li><strong>Convenient:</strong> Math on entire arrays at once</li>
+<li><strong>Foundation:</strong> Pandas, Matplotlib, and Machine Learning all use NumPy</li>
+</ul>
+
+<script type="text/plain" class="pycode">
+import numpy as np
+
+# Creating arrays
+a = np.array([1, 2, 3, 4, 5])
+b = np.array([[1, 2, 3], [4, 5, 6]])
+
+print(a)                # [1 2 3 4 5]
+print(b)
+# [[1 2 3]
+#  [4 5 6]]
+</script>
+
+<h3>9.2 Creating Special Arrays</h3>
+
+<script type="text/plain" class="pycode">
+import numpy as np
+
+# Arrays of zeros and ones
+print(np.zeros((3, 3)))
+# [[0. 0. 0.]
+#  [0. 0. 0.]
+#  [0. 0. 0.]]
+
+print(np.ones((2, 4)))
+# [[1. 1. 1. 1.]
+#  [1. 1. 1. 1.]]
+
+print(np.full((2, 2), 7))
+# [[7 7]
+#  [7 7]]
+
+# Identity matrix (1s on diagonal, 0s elsewhere)
+print(np.eye(3))
+# [[1. 0. 0.]
+#  [0. 1. 0.]
+#  [0. 0. 1.]]
+
+# Sequences
+print(np.arange(0, 10, 2))       # [0 2 4 6 8]
+print(np.linspace(0, 1, 5))      # [0. 0.25 0.5 0.75 1. ]
+
+# Random numbers
+print(np.random.rand(3, 3))      # Random numbers between 0 and 1
+print(np.random.randint(1, 10, 5))  # 5 random integers from 1 to 9
+</script>
+
+<h3>9.3 Array Properties</h3>
+
+<script type="text/plain" class="pycode">
+arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+
+print(arr.shape)      # (3, 3) - 3 rows, 3 columns
+print(arr.ndim)       # 2 - it's a 2D array
+print(arr.size)       # 9 - total number of elements
+print(arr.dtype)      # int64 - each number is a 64-bit integer
+print(arr.itemsize)   # 8 - each number takes 8 bytes
+print(arr.nbytes)     # 72 - total memory used (9 * 8)
+</script>
+
+<h3>9.4 Indexing and Slicing</h3>
+
+<script type="text/plain" class="pycode">
+arr = np.array([10, 20, 30, 40, 50])
+
+print(arr[0])         # 10
+print(arr[-1])        # 50
+print(arr[1:4])       # [20 30 40]
+print(arr[::2])       # [10 30 50]
+print(arr[::-1])      # [50 40 30 20 10]
+
+# 2D array
+matrix = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print(matrix[0, 1])      # 2 (row 0, column 1)
+print(matrix[1, :])        # [4 5 6] (entire row 1)
+print(matrix[:, 2])        # [3 6 9] (entire column 2)
+print(matrix[0:2, 1:3])    # [[2 3]  (rows 0-1, columns 1-2)
+                            #  [5 6]]
+
+# Boolean indexing (very powerful!)
+arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+print(arr[arr > 5])        # [ 6  7  8  9 10]
+print(arr[arr % 2 == 0])   # [ 2  4  6  8 10]
+</script>
+
+<div class="tip">Boolean indexing is one of NumPy's superpowers! Instead of writing a loop, you write a condition inside brackets, and NumPy instantly gives you only the matching items.</div>
+
+<h3>9.5 Array Math (Vectorization)</h3>
+
+<script type="text/plain" class="pycode">
+a = np.array([1, 2, 3, 4, 5])
+
+# Math on entire array at once!
+print(a + 10)         # [11 12 13 14 15]
+print(a * 2)          # [ 2  4  6  8 10]
+print(a ** 2)         # [ 1  4  9 16 25]
+print(np.sqrt(a))     # [1. 1.414 1.732 2. 2.236]
+print(np.sin(a))      # Sine of each element
+
+# Two arrays
+b = np.array([5, 4, 3, 2, 1])
+print(a + b)          # [6 6 6 6 6]
+print(a * b)          # [5 8 9 8 5]
+
+# Aggregation
+print(a.sum())        # 15
+print(a.mean())       # 3.0
+print(a.min())        # 1
+print(a.max())        # 5
+print(a.std())        # Standard deviation
+
+# 2D aggregation
+matrix = np.array([[1, 2, 3], [4, 5, 6]])
+print(matrix.sum(axis=0))      # [5 7 9] (sum of each column)
+print(matrix.sum(axis=1))      # [ 6 15] (sum of each row)
+print(matrix.mean(axis=0))     # [2.5 3.5 4.5]
+</script>
+
+<div class="note">
+<strong>No loops needed!</strong> In Python lists, you'd need a `for` loop to add 10 to every item. In NumPy, `a + 10` does it instantly for millions of items. This is called <strong>vectorization</strong>.
+</div>
+
+<h3>9.6 Reshaping Arrays</h3>
+
+<script type="text/plain" class="pycode">
+arr = np.arange(12)           # [0 1 2 3 4 5 6 7 8 9 10 11]
+
+# Reshape to 3x4 matrix
+matrix = arr.reshape(3, 4)
+print(matrix)
+# [[ 0  1  2  3]
+#  [ 4  5  6  7]
+#  [ 8  9 10 11]]
+
+# Let NumPy figure out one dimension
+reshaped = arr.reshape(3, -1)
+print(reshaped.shape)         # (3, 4)
+
+# Flatten (make 1D)
+flat = matrix.flatten()
+print(flat)                   # [0 1 2 ... 11]
+
+# Transpose (rows become columns)
+print(matrix.T)
+# [[ 0  4  8]
+#  [ 1  5  9]
+#  [ 2  6 10]
+#  [ 3  7 11]]
+</script>
+
+<h3>9.7 Linear Algebra</h3>
+
+<script type="text/plain" class="pycode">
+a = np.array([[1, 2], [3, 4]])
+b = np.array([[2, 0], [1, 3]])
+
+# Matrix multiplication
+print(a @ b)              # or np.dot(a, b)
+# [[ 4  6]
+#  [10 12]]
+
+# Inverse
+print(np.linalg.inv(a))
+# [[-2.   1. ]
+#  [ 1.5 -0.5]]
+
+# Determinant
+print(np.linalg.det(a))   # -2.0
+
+# Eigenvalues
+values, vectors = np.linalg.eig(a)
+print("Eigenvalues:", values)
+
+# Solve equations: ax = b
+# 2x + y = 5
+# x - y = 1
+A = np.array([[2, 1], [1, -1]])
+B = np.array([5, 1])
+x = np.linalg.solve(A, B)
+print(x)                  # [2. 1.]
+</script>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 10 ============================ -->
+<h2>10. Pandas — Excel on Steroids</h2>
+
+<div class="analogy">
+<strong>Analogy:</strong> Pandas is like Microsoft Excel, but you control it with Python code instead of clicking buttons. It can handle millions of rows, clean messy data, and do calculations in one line that would take hours in Excel!
+</div>
+
+<h3>10.1 Series — A Single Column</h3>
+
+<script type="text/plain" class="pycode">
+import pandas as pd
+import numpy as np
+
+# Creating a Series (like a column in Excel)
+s = pd.Series([10, 20, 30, 40, 50])
+print(s)
+# 0    10
+# 1    20
+# 2    30
+# 3    40
+# 4    50
+# dtype: int64
+
+# With custom labels (index)
+s = pd.Series([85, 92, 78, 96], index=["Rahul", "Priya", "Amit", "Sneha"])
+print(s)
+# Rahul    85
+# Priya    92
+# Amit     78
+# Sneha    96
+# dtype: int64
+
+# Accessing
+print(s["Priya"])         # 92
+print(s.iloc[1])          # 92 (position-based)
+print(s.loc["Priya"])     # 92 (label-based)
+
+# Operations
+print(s + 5)              # Adds 5 to every mark!
+print(s.mean())           # 87.75
+print(s.max())            # 96
+print(s.min())            # 78
+print(s.describe())
+# count     4.0
+# mean     87.75
+# std       7.63
+# min      78.0
+# 25%      83.25
+# 50%      88.5
+# 75%      93.5
+# max      96.0
+</script>
+
+<h3>10.2 DataFrame — The Full Table</h3>
+
+<script type="text/plain" class="pycode">
+# Creating a DataFrame (like a full Excel sheet)
+df = pd.DataFrame({
+    "Name": ["Rahul", "Priya", "Amit", "Sneha"],
+    "Math": [85, 92, 78, 96],
+    "Science": [88, 95, 82, 90],
+    "English": [78, 88, 85, 92]
+})
+
+print(df)
+#     Name  Math  Science  English
+# 0  Rahul    85       88       78
+# 1  Priya    92       95       88
+# 2   Amit    78       82       85
+# 3  Sneha    96       90       92
+
+# Basic info
+print(df.shape)           # (4, 4) - 4 rows, 4 columns
+print(df.columns)         # Index(['Name', 'Math', 'Science', 'English'], dtype='object')
+print(df.index)           # RangeIndex(start=0, stop=4, step=1)
+print(df.dtypes)          # Data type of each column
+print(df.head(2))         # First 2 rows
+print(df.tail(2))         # Last 2 rows
+print(df.info())          # Summary including memory usage
+print(df.describe())      # Statistics for numeric columns
+</script>
+
+<h3>10.3 Selecting Data (loc and iloc)</h3>
+
+<script type="text/plain" class="pycode">
+# Set Name as the row label
+df_indexed = df.set_index("Name")
+print(df_indexed)
+#        Math  Science  English
+# Name
+# Rahul    85       88       78
+# Priya    92       95       88
+# Amit     78       82       85
+# Sneha    96       90       92
+
+# loc = label-based (use NAMES)
+print(df_indexed.loc["Rahul"])           # All subjects for Rahul
+print(df_indexed.loc["Rahul", "Math"])   # Just Math mark
+print(df_indexed.loc["Rahul":"Amit"])    # Rahul to Amit
+print(df_indexed.loc[:, "Math"])         # Math column for everyone
+
+# iloc = position-based (use NUMBERS)
+print(df_indexed.iloc[0])               # First row (Rahul)
+print(df_indexed.iloc[0, 0])            # First row, first column (85)
+print(df_indexed.iloc[0:2])             # First 2 rows
+print(df_indexed.iloc[:, 0:2])           # First 2 columns
+</script>
+
+<div class="note">
+<strong>Remember:</strong> `loc` uses NAMES (like "Rahul", "Math"). `iloc` uses NUMBERS (like 0, 1, 2). `loc` includes the end label, but `iloc` does NOT include the end number!
+</div>
+
+<h3>10.4 Filtering (Boolean Indexing)</h3>
+
+<script type="text/plain" class="pycode">
+# Students who scored more than 90 in Math
+print(df[df["Math"] > 90])
+#     Name  Math  Science  English
+# 1  Priya    92       95       88
+# 3  Sneha    96       90       92
+
+# Students who passed ALL subjects (assuming pass = 40)
+passed_all = df[(df["Math"] >= 40) & (df["Science"] >= 40) & (df["English"] >= 40)]
+print(passed_all)
+
+# Students who scored above 90 in Math OR Science
+print(df[(df["Math"] > 90) | (df["Science"] > 90)])
+
+# Query method (easier to read)
+print(df.query("Math > 90 and Science > 90"))
+
+# Where method (replace values conditionally)
+print(df["Math"].where(df["Math"] >= 80, "Fail"))
+</script>
+
+<h3>10.5 Adding and Modifying Columns</h3>
+
+<script type="text/plain" class="pycode">
+# Add a new column
+df["Total"] = df["Math"] + df["Science"] + df["English"]
+df["Average"] = df["Total"] / 3
+
+# Add using assign (doesn't modify original)
+df_new = df.assign(Percentage=df["Average"])
+
+# Modify existing column
+df["Math"] = df["Math"] + 5  # Add 5 bonus marks to everyone!
+
+# Drop a column
+df = df.drop("Total", axis=1)   # axis=1 means column
+
+# Drop a row
+df = df.drop(2, axis=0)         # axis=0 means row (remove index 2)
+</script>
+
+<h3>10.6 Sorting and Ranking</h3>
+
+<script type="text/plain" class="pycode">
+# Sort by Math marks (highest first)
+print(df.sort_values("Math", ascending=False))
+
+# Sort by multiple columns
+print(df.sort_values(["Science", "Math"], ascending=[False, False]))
+
+# Rank
+print(df["Math"].rank())
+print(df["Math"].rank(ascending=False))   # Rank 1 = highest!
+</script>
+
+<h3>10.7 GroupBy (Split-Apply-Combine)</h3>
+
+<script type="text/plain" class="pycode">
+# Add a section column
+df["Section"] = ["A", "B", "A", "B"]
+
+# Average marks by section
+print(df.groupby("Section")[["Math", "Science", "English"]].mean())
+#        Math  Science  English
+# Section
+# A       91.5     89.0     83.5
+# B       85.0     92.5     90.0
+
+# Multiple aggregations
+print(df.groupby("Section").agg({
+    "Math": ["mean", "max", "min"],
+    "Science": ["mean", "max"]
+}))
+
+# Named aggregations (cleanest way)
+print(df.groupby("Section").agg(
+    avg_math=("Math", "mean"),
+    max_science=("Science", "max"),
+    total_students=("Name", "count")
+))
+</script>
+
+<h3>10.8 Handling Missing Data</h3>
+
+<script type="text/plain" class="pycode">
+# Create data with some missing values
+df_nan = pd.DataFrame({
+    "Name": ["Rahul", "Priya", "Amit", "Sneha"],
+    "Math": [85, np.nan, 78, 96],
+    "Science": [88, 95, np.nan, 90]
+})
+
+print(df_nan.isnull())       # True where data is missing
+print(df_nan.notnull())      # True where data exists
+print(df_nan.dropna())       # Remove rows with ANY missing data
+print(df_nan.dropna(subset=["Math"]))   # Remove only if Math is missing
+print(df_nan.fillna(0))      # Fill missing with 0
+print(df_nan.fillna({"Math": 50, "Science": 60}))   # Fill per column
+print(df_nan.ffill())        # Forward fill (use previous value)
+print(df_nan.bfill())        # Backward fill (use next value)
+print(df_nan["Math"].interpolate())   # Guess missing value from neighbors!
+</script>
+
+<h3>10.9 Reading and Writing Files</h3>
+
+<script type="text/plain" class="pycode">
+# Save to CSV
+df.to_csv("student_marks.csv", index=False)
+
+# Read from CSV
+df_loaded = pd.read_csv("student_marks.csv")
+
+# Read from Excel
+df_excel = pd.read_excel("data.xlsx", sheet_name="Sheet1")
+
+# Read from JSON
+df_json = pd.read_json("data.json")
+
+# Read from Internet!
+url = "https://raw.githubusercontent.com/datasets/iris/main/data/iris.csv"
+df_iris = pd.read_csv(url)
+print(df_iris.head())
+
+# Save to Excel (need openpyxl: pip install openpyxl)
+df.to_excel("output.xlsx", index=False, sheet_name="Marks")
+</script>
+
+<h3>10.10 Time Series (Working with Dates)</h3>
+
+<script type="text/plain" class="pycode">
+# Create a date range
+dates = pd.date_range("2024-01-01", periods=10, freq="D")
+print(dates)
+# DatetimeIndex(['2024-01-01', '2024-01-02', ... '2024-01-10'], dtype='datetime64[ns]', freq='D')
+
+# Create a time series DataFrame
+df_ts = pd.DataFrame({
+    "Temperature": [22, 23, 25, 24, 26, 28, 30, 29, 27, 25]
+}, index=dates)
+
+print(df_ts)
+
+# Resample (group by time period)
+# Create monthly data
+monthly = df_ts.resample("M").mean()
+print(monthly)
+
+# Rolling average (moving average)
+df_ts["Rolling_3"] = df_ts["Temperature"].rolling(window=3).mean()
+print(df_ts)
+
+# Date properties
+print(df_ts.index.year)
+print(df_ts.index.month)
+print(df_ts.index.dayofweek)   # 0=Monday, 6=Sunday
+print(df_ts.index.day_name())
+</script>
+
+<div class="page-break"></div>
+
+<!-- ============================ CHAPTER 11 ============================ -->
+<h2>11. Real-World Projects</h2>
+
+<div class="analogy">
+<strong>Why projects?</strong> Reading notes is like watching swimming videos. You learn the theory, but you only REALLY learn when you jump in the water! These projects will take you from beginner to confident programmer.
+</div>
+
+<div class="project-box">
+<div class="project-title">Project 1: Student Report Card System</div>
+<p><strong>Level:</strong> Beginner | <strong>Topics:</strong> Input, variables, if-else, loops, dictionaries</p>
+
+<script type="text/plain" class="pycode">
+# STUDENT REPORT CARD SYSTEM
+# This program lets you enter marks for multiple students
+# and generates a formatted report card with grades.
+
+def get_grade(marks):
+    """Convert marks to grade."""
+    if marks >= 90: return "A+"
+    elif marks >= 80: return "A"
+    elif marks >= 70: return "B"
+    elif marks >= 60: return "C"
+    elif marks >= 50: return "D"
+    elif marks >= 40: return "E"
+    else: return "F (Fail)"
+
+def calculate_result(student):
+    """Calculate total, average, grade, and pass/fail status."""
+    total = sum(student["marks"].values())
+    count = len(student["marks"])
+    average = total / count
+    
+    # Check if passed all subjects (need 40 in each)
+    passed = all(m >= 40 for m in student["marks"].values())
+    
+    return {
+        "total": total,
+        "average": average,
+        "grade": get_grade(average),
+        "status": "Pass" if passed else "Fail"
+    }
+
+def print_report_card(student, result):
+    """Print a beautiful report card."""
+    print("=" * 50)
+    print(f"  REPORT CARD - {student['name']}")
+    print("=" * 50)
+    print(f"  Class: {student['class']}")
+    print(f"  Roll No: {student['roll']}")
+    print("-" * 50)
+    for subject, marks in student["marks"].items():
+        grade = get_grade(marks)
+        print(f"  {subject:15s}: {marks:3d}  ({grade})")
+    print("-" * 50)
+    print(f"  Total Marks:   {result['total']}")
+    print(f"  Average:       {result['average']:.1f}%")
+    print(f"  Grade:         {result['grade']}")
+    print(f"  Status:        {result['status']}")
+    print("=" * 50)
+    print()
+
+# Main program
+students = []
+
+while True:
+    print("\n--- Enter Student Details ---")
+    name = input("Name (or 'done' to finish): ")
+    if name.lower() == "done":
+        break
+    
+    roll = input("Roll Number: ")
+    cls = input("Class: ")
+    
+    marks = {}
+    for subject in ["Math", "Science", "English", "Hindi", "Social Science"]:
+        while True:
+            try:
+                m = float(input(f"  {subject} marks (out of 100): "))
+                if 0 <= m <= 100:
+                    marks[subject] = m
+                    break
+                else:
+                    print("  Marks must be between 0 and 100!")
+            except ValueError:
+                print("  Please enter a number!")
+    
+    student = {"name": name, "roll": roll, "class": cls, "marks": marks}
+    students.append(student)
+
+# Generate and print all report cards
+print("\n" + "=" * 50)
+print("         GENERATING REPORT CARDS")
+print("=" * 50 + "\n")
+
+for student in students:
+    result = calculate_result(student)
+    print_report_card(student, result)
+
+# Class summary
+if students:
+    averages = []
+    for s in students:
+        avg = sum(s["marks"].values()) / len(s["marks"])
+        averages.append(avg)
+    
+    print("=" * 50)
+    print("         CLASS SUMMARY")
+    print("=" * 50)
+    print(f"  Total Students: {len(students)}")
+    print(f"  Class Average:  {sum(averages)/len(averages):.1f}%")
+    print(f"  Highest Average: {max(averages):.1f}%")
+    print(f"  Lowest Average:  {min(averages):.1f}%")
+    print("=" * 50)
+</script>
+
+<div class="exercise">
+<strong>Extensions to try:</strong>
+<ol>
+<li>Save the report cards to a text file</li>
+<li>Add subject-wise class averages</li>
+<li>Rank students by their average marks</li>
+<li>Add a "Remarks" section based on performance</li>
+</ol>
+</div>
+</div>
+
+<div class="project-box">
+<div class="project-title">Project 2: Personal Expense Tracker</div>
+<p><strong>Level:</strong> Intermediate | <strong>Topics:</strong> Dictionaries, file I/O, JSON, loops, functions</p>
+
+<script type="text/plain" class="pycode">
+import json
+from datetime import datetime
+import os
+
+DATA_FILE = "expenses.json"
+
+def load_expenses():
+    """Load expenses from file, or return empty list."""
+    if os.path.exists(DATA_FILE):
+        with open(DATA_FILE, "r") as f:
+            return json.load(f)
+    return []
+
+def save_expenses(expenses):
+    """Save expenses to file."""
+    with open(DATA_FILE, "w") as f:
+        json.dump(expenses, f, indent=2)
+
+def add_expense(expenses):
+    """Add a new expense entry."""
+    print("\n--- Add Expense ---")
+    category = input("Category (Food/Transport/Entertainment/Bills/Other): ")
+    amount = float(input("Amount (Rs.): "))
+    description = input("Description: ")
+    date = input("Date (YYYY-MM-DD) or press Enter for today: ")
+    if not date:
+        date = datetime.now().strftime("%Y-%m-%d")
+    
+    expense = {
+        "date": date,
+        "category": category,
+        "amount": amount,
+        "description": description
+    }
+    expenses.append(expense)
+    save_expenses(expenses)
+    print("Expense added successfully!")
+
+def view_expenses(expenses):
+    """Display all expenses."""
+    if not expenses:
+        print("No expenses recorded yet.")
+        return
+    
+    print("\n--- All Expenses ---")
+    print(f"{'Date':12} {'Category':15} {'Amount':>10} {'Description'}")
+    print("-" * 60)
+    for e in expenses:
+        print(f"{e['date']:12} {e['category']:15} Rs.{e['amount']:>8.2f} {e['description']}")
+    print("-" * 60)
+    total = sum(e["amount"] for e in expenses)
+    print(f"{'Total':>28} Rs.{total:>8.2f}")
+
+def view_summary(expenses):
+    """Show spending by category."""
+    if not expenses:
+        print("No expenses to summarize.")
+        return
+    
+    print("\n--- Category Summary ---")
+    category_totals = {}
+    for e in expenses:
+        cat = e["category"]
+        category_totals[cat] = category_totals.get(cat, 0) + e["amount"]
+    
+    total = sum(category_totals.values())
+    for cat, amount in sorted(category_totals.items(), key=lambda x: x[1], reverse=True):
+        percentage = (amount / total) * 100
+        bar = "█" * int(percentage / 2)
+        print(f"{cat:15} Rs.{amount:>8.2f} ({percentage:5.1f}%) {bar}")
+    
+    print(f"\n{'Total Spending':15} Rs.{total:>8.2f}")
+
+def monthly_report(expenses):
+    """Show spending by month."""
+    monthly = {}
+    for e in expenses:
+        month = e["date"][:7]  # YYYY-MM
+        monthly[month] = monthly.get(month, 0) + e["amount"]
+    
+    print("\n--- Monthly Report ---")
+    for month, amount in sorted(monthly.items()):
+        print(f"{month}: Rs.{amount:.2f}")
+
+def main():
+    expenses = load_expenses()
+    
+    while True:
+        print("\n" + "=" * 40)
+        print("     PERSONAL EXPENSE TRACKER")
+        print("=" * 40)
+        print("1. Add Expense")
+        print("2. View All Expenses")
+        print("3. Category Summary")
+        print("4. Monthly Report")
+        print("5. Exit")
+        print("=" * 40)
+        
+        choice = input("Enter choice (1-5): ")
+        
+        if choice == "1":
+            add_expense(expenses)
+        elif choice == "2":
+            view_expenses(expenses)
+        elif choice == "3":
+            view_summary(expenses)
+        elif choice == "4":
+            monthly_report(expenses)
+        elif choice == "5":
+            print("Goodbye!")
+            break
+        else:
+            print("Invalid choice! Try again.")
+
+if __name__ == "__main__":
+    main()
+</script>
+
+<div class="exercise">
+<strong>Extensions to try:</strong>
+<ol>
+<li>Add a budget limit and warn when exceeded</li>
+<li>Add search functionality (find by keyword)</li>
+<li>Export data to CSV for Excel analysis</li>
+<li>Add a simple bar chart using matplotlib</li>
+</ol>
+</div>
+</div>
+
+<div class="project-box">
+<div class="project-title">Project 3: Data Analysis with NumPy & Pandas</div>
+<p><strong>Level:</strong> Intermediate-Advanced | <strong>Topics:</strong> NumPy, Pandas, CSV, statistics, visualization</p>
+
+<script type="text/plain" class="pycode">
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# PROJECT: Analyze student exam results
+# We have data for 100 students across 5 subjects
+
+# Step 1: Create sample data (in real life, you'd read from CSV!)
+np.random.seed(42)  # For reproducibility
+
+subjects = ["Math", "Science", "English", "Hindi", "Social_Science"]
+n_students = 100
+
+# Generate marks (some students are weak, some are strong)
+data = {}
+for subject in subjects:
+    # Mix of different distributions to make it realistic
+    weak = np.random.normal(45, 10, 20)      # 20 weak students
+    avg = np.random.normal(65, 8, 50)       # 50 average students
+    strong = np.random.normal(88, 5, 30)    # 30 strong students
+    combined = np.concatenate([weak, avg, strong])
+    combined = np.clip(combined, 0, 100).astype(int)  # Keep 0-100
+    np.random.shuffle(combined)
+    data[subject] = combined
+
+# Create DataFrame
+students_df = pd.DataFrame(data)
+students_df["Student_ID"] = [f"STU_{i:03d}" for i in range(1, n_students + 1)]
+students_df.set_index("Student_ID", inplace=True)
+
+print("Sample Data:")
+print(students_df.head(10))
+print(f"\nDataset shape: {students_df.shape}")
+
+# Step 2: Calculate statistics
+total_marks = students_df.sum(axis=1)
+students_df["Total"] = total_marks
+students_df["Average"] = total_marks / len(subjects)
+
+# Determine pass/fail (need 40 in each subject)
+students_df["Pass_All"] = (students_df[subjects] >= 40).all(axis=1)
+
+# Assign grades
+
+def assign_grade(avg):
+    if avg >= 90: return "A+"
+    elif avg >= 80: return "A"
+    elif avg >= 70: return "B"
+    elif avg >= 60: return "C"
+    elif avg >= 50: return "D"
+    elif avg >= 40: return "E"
+    else: return "F"
+
+students_df["Grade"] = students_df["Average"].apply(assign_grade)
+
+print("\n--- Complete Data ---")
+print(students_df.head(15))
+
+# Step 3: Analysis
+print("\n" + "=" * 50)
+print("         ANALYSIS REPORT")
+print("=" * 50)
+
+# Overall statistics
+print("\n1. Overall Subject Statistics:")
+print(students_df[subjects].describe().round(1))
+
+# Pass/Fail counts
+print("\n2. Pass/Fail Summary:")
+print(students_df["Pass_All"].value_counts())
+pass_rate = students_df["Pass_All"].mean() * 100
+print(f"Pass Rate: {pass_rate:.1f}%")
+
+# Grade distribution
+print("\n3. Grade Distribution:")
+grade_counts = students_df["Grade"].value_counts().sort_index()
+print(grade_counts)
+
+# Top 10 students
+print("\n4. Top 10 Students:")
+top_students = students_df.nlargest(10, "Average")[["Average", "Grade"]]
+print(top_students)
+
+# Subject with highest average
+print("\n5. Subject-wise Average:")
+subject_averages = students_df[subjects].mean().sort_values(ascending=False)
+print(subject_averages.round(1))
+
+# Step 4: Save results
+students_df.to_csv("exam_results.csv")
+print("\nResults saved to 'exam_results.csv'")
+
+# Step 5: Visualization (if matplotlib is available)
+try:
+    fig, axes = plt.subplots(2, 2, figsize=(12, 10))
+    
+    # Histogram of averages
+    axes[0, 0].hist(students_df["Average"], bins=20, color="skyblue", edgecolor="black")
+    axes[0, 0].set_title("Distribution of Average Marks")
+    axes[0, 0].set_xlabel("Average Marks")
+    axes[0, 0].set_ylabel("Number of Students")
+    
+    # Box plot by subject
+    students_df[subjects].boxplot(ax=axes[0, 1])
+    axes[0, 1].set_title("Marks Distribution by Subject")
+    axes[0, 1].tick_params(axis='x', rotation=45)
+    
+    # Grade distribution bar chart
+    grade_counts.plot(kind="bar", ax=axes[1, 0], color="lightgreen")
+    axes[1, 0].set_title("Grade Distribution")
+    axes[1, 0].set_xlabel("Grade")
+    axes[1, 0].set_ylabel("Number of Students")
+    
+    # Subject averages
+    subject_averages.plot(kind="bar", ax=axes[1, 1], color="coral")
+    axes[1, 1].set_title("Average Marks by Subject")
+    axes[1, 1].set_ylabel("Average Marks")
+    axes[1, 1].tick_params(axis='x', rotation=45)
+    
+    plt.tight_layout()
+    plt.savefig("exam_analysis.png")
+    print("Charts saved to 'exam_analysis.png'")
+    plt.show()
+except ImportError:
+    print("\nInstall matplotlib for charts: pip install matplotlib")
+</script>
+
+<div class="exercise">
+<strong>Extensions to try:</strong>
+<ol>
+<li>Read real data from a CSV file instead of generating random data</li>
+<li>Add correlation analysis between subjects (which subjects are related?)</li>
+<li>Find students who failed multiple subjects for extra attention</li>
+<li>Create a function to predict final grades based on mid-term marks</li>
+<li>Generate a summary report as a PDF or HTML page</li>
+</ol>
+</div>
+</div>
+
+<div class="project-box">
+<div class="project-title">Project 4: Weather Data Analysis (Pandas + Time Series)</div>
+<p><strong>Level:</strong> Advanced | <strong>Topics:</strong> Time series, resampling, rolling averages, Pandas, NumPy</p>
+
+<script type="text/plain" class="pycode">
+import pandas as pd
+import numpy as np
+
+# Create a year of daily weather data
+np.random.seed(42)
+dates = pd.date_range("2024-01-01", periods=365, freq="D")
+
+# Simulate realistic temperature (seasonal pattern + random noise)
+base_temp = 25 + 10 * np.sin(2 * np.pi * np.arange(365) / 365 - np.pi/2)
+noise = np.random.normal(0, 3, 365)
+temperature = base_temp + noise
+
+# Humidity (higher in monsoon, lower in summer)
+base_humidity = 60 - 15 * np.sin(2 * np.pi * np.arange(365) / 365)
+humidity = base_humidity + np.random.normal(0, 5, 365)
+
+# Rainfall (monsoon months get more rain)
+month = pd.DatetimeIndex(dates).month
+rainfall = np.random.exponential(2, 365)  # Base random
+rainfall[(month >= 6) & (month <= 9)] *= 5  # Monsoon boost
+
+weather = pd.DataFrame({
+    "Date": dates,
+    "Temperature_C": temperature.round(1),
+    "Humidity_%": humidity.round(1),
+    "Rainfall_mm": rainfall.round(1)
+})
+weather.set_index("Date", inplace=True)
+
+print("Sample Weather Data:")
+print(weather.head(10))
+
+# Analysis
+print("\n" + "=" * 50)
+print("         WEATHER ANALYSIS")
+print("=" * 50)
+
+# Monthly averages
+monthly = weather.resample("M").agg({
+    "Temperature_C": ["mean", "max", "min"],
+    "Humidity_%": "mean",
+    "Rainfall_mm": "sum"
+})
+monthly.columns = ["Temp_Mean", "Temp_Max", "Temp_Min", "Humidity_Mean", "Total_Rain"]
+print("\nMonthly Summary:")
+print(monthly.round(1))
+
+# Rolling 7-day average (weekly smoothing)
+weather["Temp_7Day_Avg"] = weather["Temperature_C"].rolling(window=7).mean().round(1)
+
+# Hottest and coldest days
+hottest = weather["Temperature_C"].idxmax()
+coldest = weather["Temperature_C"].idxmin()
+print(f"\nHottest Day: {hottest.date()} ({weather.loc[hottest, 'Temperature_C']}C)")
+print(f"Coldest Day: {coldest.date()} ({weather.loc[coldest, 'Temperature_C']}C)")
+
+# Rainy season analysis
+monsoon = weather[(weather.index.month >= 6) & (weather.index.month <= 9)]
+print(f"\nMonsoon Season (Jun-Sep):")
+print(f"  Total Rainfall: {monsoon['Rainfall_mm'].sum():.1f} mm")
+print(f"  Average Humidity: {monsoon['Humidity_%'].mean():.1f}%")
+print(f"  Rainy Days (>5mm): {(monsoon['Rainfall_mm'] > 5).sum()}")
+
+# Extreme weather days
+extreme_heat = weather[weather["Temperature_C"] > 40]
+extreme_cold = weather[weather["Temperature_C"] < 10]
+print(f"\nExtreme Heat Days (>40C): {len(extreme_heat)}")
+print(f"Extreme Cold Days (<10C): {len(extreme_cold)}")
+
+# Save analysis
+weather.to_csv("weather_data.csv")
+monthly.to_csv("monthly_weather.csv")
+print("\nData saved to CSV files.")
+</script>
+
+<div class="exercise">
+<strong>Extensions to try:</strong>
+<ol>
+<li>Compare with actual weather data from a real city</li>
+<li>Detect heat waves (3+ consecutive days above 40C)</li>
+<li>Predict next week's temperature using a simple model</li>
+<li>Calculate "feels like" temperature using heat index formula</li>
+<li>Plot temperature trends with matplotlib</li>
+</ol>
+</div>
+</div>
+
+<div class="project-box">
+<div class="project-title">Project 5: Quiz Game with Scoreboard</div>
+<p><strong>Level:</strong> Beginner-Intermediate | <strong>Topics:</strong> Dictionaries, file I/O, JSON, random, loops</p>
+
+<script type="text/plain" class="pycode">
+import json
+import random
+import os
+import time
+
+QUESTIONS_FILE = "quiz_questions.json"
+SCORES_FILE = "quiz_scores.json"
+
+# Default questions
+default_questions = [
+    {"q": "What is the capital of India?", "options": ["Mumbai", "Delhi", "Kolkata", "Chennai"], "answer": 1},
+    {"q": "Which planet is known as the Red Planet?", "options": ["Venus", "Mars", "Jupiter", "Saturn"], "answer": 1},
+    {"q": "What is 2 + 2 * 2?", "options": ["6", "8", "4", "10"], "answer": 0},
+    {"q": "Which gas do plants absorb?", "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"], "answer": 2},
+    {"q": "Who wrote 'Romeo and Juliet'?", "options": ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"], "answer": 1},
+    {"q": "What is the chemical symbol for water?", "options": ["WA", "HO", "H2O", "O2H"], "answer": 2},
+    {"q": "How many continents are there?", "options": ["5", "6", "7", "8"], "answer": 2},
+    {"q": "Which is the largest ocean?", "options": ["Atlantic", "Indian", "Arctic", "Pacific"], "answer": 3},
+    {"q": "What is the square root of 144?", "options": ["10", "11", "12", "13"], "answer": 2},
+    {"q": "In which year did India gain independence?", "options": ["1945", "1946", "1947", "1948"], "answer": 2}
+]
+
+def load_questions():
+    if os.path.exists(QUESTIONS_FILE):
+        with open(QUESTIONS_FILE, "r") as f:
+            return json.load(f)
+    return default_questions
+
+def load_scores():
+    if os.path.exists(SCORES_FILE):
+        with open(SCORES_FILE, "r") as f:
+            return json.load(f)
+    return []
+
+def save_scores(scores):
+    with open(SCORES_FILE, "w") as f:
+        json.dump(scores, f, indent=2)
+
+def run_quiz():
+    questions = load_questions()
+    random.shuffle(questions)
+    
+    player_name = input("Enter your name: ")
+    score = 0
+    total = len(questions)
+    start_time = time.time()
+    
+    print(f"\nWelcome, {player_name}!")
+    print(f"You will answer {total} questions. Good luck!\n")
+    
+    for i, q in enumerate(questions, 1):
+        print(f"Question {i}/{total}: {q['q']}")
+        for idx, opt in enumerate(q['options']):
+            print(f"  {idx + 1}. {opt}")
+        
+        while True:
+            try:
+                answer = int(input("Your answer (1-4): ")) - 1
+                if 0 <= answer <= 3:
+                    break
+                print("Please enter 1, 2, 3, or 4.")
+            except ValueError:
+                print("Please enter a number.")
+        
+        if answer == q['answer']:
+            print("Correct! +1 point\n")
+            score += 1
+        else:
+            correct = q['options'][q['answer']]
+            print(f"Wrong! The correct answer was: {correct}\n")
+    
+    elapsed = time.time() - start_time
+    percentage = (score / total) * 100
+    
+    print("=" * 40)
+    print(f"Quiz Complete!")
+    print(f"Score: {score}/{total} ({percentage:.1f}%)")
+    print(f"Time: {elapsed:.1f} seconds")
+    print("=" * 40)
+    
+    # Grade
+    if percentage >= 90: grade = "A+ (Excellent!)"
+    elif percentage >= 80: grade = "A (Great job!)"
+    elif percentage >= 70: grade = "B (Good!)"
+    elif percentage >= 60: grade = "C (Average)"
+    else: grade = "D (Keep practicing!)"
+    print(f"Grade: {grade}")
+    
+    # Save score
+    scores = load_scores()
+    scores.append({
+        "name": player_name,
+        "score": score,
+        "total": total,
+        "percentage": percentage,
+        "time": elapsed,
+        "date": time.strftime("%Y-%m-%d %H:%M")
+    })
+    scores.sort(key=lambda x: x["percentage"], reverse=True)
+    save_scores(scores[:10])  # Keep top 10
+
+def show_leaderboard():
+    scores = load_scores()
+    if not scores:
+        print("No scores yet!")
+        return
+    
+    print("\n" + "=" * 50)
+    print("         LEADERBOARD (Top 10)")
+    print("=" * 50)
+    print(f"{'Rank':<6} {'Name':<15} {'Score':<8} {'%':<6} {'Time':<8}")
+    print("-" * 50)
+    for i, s in enumerate(scores, 1):
+        print(f"{i:<6} {s['name']:<15} {s['score']}/{s['total']:<3} {s['percentage']:>5.1f} {s['time']:>6.1f}s")
+    print("=" * 50)
+
+def main():
+    while True:
+        print("\n" + "=" * 40)
+        print("        PYTHON QUIZ GAME")
+        print("=" * 40)
+        print("1. Start Quiz")
+        print("2. Leaderboard")
+        print("3. Exit")
+        print("=" * 40)
+        
+        choice = input("Choice: ")
+        if choice == "1":
+            run_quiz()
+        elif choice == "2":
+            show_leaderboard()
+        elif choice == "3":
+            print("Thanks for playing!")
+            break
+        else:
+            print("Invalid choice!")
+
+if __name__ == "__main__":
+    main()
+</script>
+
+<div class="exercise">
+<strong>Extensions to try:</strong>
+<ol>
+<li>Add a timer per question (e.g., 15 seconds each)</li>
+<li>Add difficulty levels (easy/medium/hard questions)</li>
+<li>Add categories (Science, History, Math, Sports)</li>
+<li>Add a GUI using tkinter</li>
+<li>Add multiplayer mode (2 players take turns)</li>
+</ol>
+</div>
+</div>
+
+<div class="project-box">
+<div class="project-title">Project 6: Library Management System</div>
+<p><strong>Level:</strong> Intermediate | <strong>Topics:</strong> OOP, file I/O, JSON, lists, loops, classes</p>
+
+<script type="text/plain" class="pycode">
+import json
+import os
+from datetime import datetime, timedelta
+
+DATA_FILE = "library_data.json"
+
+class Book:
+    def __init__(self, book_id, title, author, copies=1):
+        self.book_id = book_id
+        self.title = title
+        self.author = author
+        self.total_copies = copies
+        self.available = copies
+        self.borrowed_by = {}  # {student_id: due_date}
+    
+    def to_dict(self):
+        return {
+            "book_id": self.book_id,
+            "title": self.title,
+            "author": self.author,
+            "total_copies": self.total_copies,
+            "available": self.available,
+            "borrowed_by": self.borrowed_by
+        }
+    
+    @classmethod
+    def from_dict(cls, data):
+        book = cls(data["book_id"], data["title"], data["author"], data["total_copies"])
+        book.available = data["available"]
+        book.borrowed_by = data["borrowed_by"]
+        return book
+    
+    def __str__(self):
+        status = f"Available: {self.available}/{self.total_copies}"
+        return f"[{self.book_id}] {self.title} by {self.author} - {status}"
+
+class Library:
+    def __init__(self, filename=DATA_FILE):
+        self.filename = filename
+        self.books = {}
+        self.load()
+    
+    def load(self):
+        if os.path.exists(self.filename):
+            with open(self.filename, "r") as f:
+                data = json.load(f)
+                for book_id, book_data in data.items():
+                    self.books[book_id] = Book.from_dict(book_data)
+    
+    def save(self):
+        data = {book_id: book.to_dict() for book_id, book in self.books.items()}
+        with open(self.filename, "w") as f:
+            json.dump(data, f, indent=2)
+    
+    def add_book(self, book_id, title, author, copies=1):
+        if book_id in self.books:
+            self.books[book_id].total_copies += copies
+            self.books[book_id].available += copies
+            print(f"Added {copies} more copies of '{title}'")
+        else:
+            self.books[book_id] = Book(book_id, title, author, copies)
+            print(f"Added new book: '{title}'")
+        self.save()
+    
+    def borrow_book(self, book_id, student_id, days=14):
+        if book_id not in self.books:
+            print("Book not found!")
+            return
+        
+        book = self.books[book_id]
+        if book.available <= 0:
+            print("No copies available!")
+            return
+        
+        if student_id in book.borrowed_by:
+            print("You already have this book!")
+            return
+        
+        due_date = (datetime.now() + timedelta(days=days)).strftime("%Y-%m-%d")
+        book.borrowed_by[student_id] = due_date
+        book.available -= 1
+        self.save()
+        print(f"Borrowed '{book.title}'. Due date: {due_date}")
+    
+    def return_book(self, book_id, student_id):
+        if book_id not in self.books:
+            print("Book not found!")
+            return
+        
+        book = self.books[book_id]
+        if student_id not in book.borrowed_by:
+            print("You haven't borrowed this book!")
+            return
+        
+        del book.borrowed_by[student_id]
+        book.available += 1
+        self.save()
+        print(f"Returned '{book.title}'. Thank you!")
+    
+    def search(self, keyword):
+        results = []
+        for book in self.books.values():
+            if keyword.lower() in book.title.lower() or keyword.lower() in book.author.lower():
+                results.append(book)
+        return results
+    
+    def list_books(self):
+        if not self.books:
+            print("No books in library!")
+            return
+        print("\n--- Library Books ---")
+        for book in self.books.values():
+            print(book)
+    
+    def overdue_books(self):
+        today = datetime.now().strftime("%Y-%m-%d")
+        print("\n--- Overdue Books ---")
+        found = False
+        for book in self.books.values():
+            for student_id, due_date in book.borrowed_by.items():
+                if due_date < today:
+                    print(f"[{book.book_id}] {book.title} - Borrowed by {student_id}, Due: {due_date}")
+                    found = True
+        if not found:
+            print("No overdue books!")
+
+def main():
+    lib = Library()
+    
+    while True:
+        print("\n" + "=" * 40)
+        print("     LIBRARY MANAGEMENT SYSTEM")
+        print("=" * 40)
+        print("1. Add Book")
+        print("2. Borrow Book")
+        print("3. Return Book")
+        print("4. Search Book")
+        print("5. List All Books")
+        print("6. Check Overdue Books")
+        print("7. Exit")
+        print("=" * 40)
+        
+        choice = input("Choice: ")
+        
+        if choice == "1":
+            book_id = input("Book ID: ")
+            title = input("Title: ")
+            author = input("Author: ")
+            copies = int(input("Copies: ") or "1")
+            lib.add_book(book_id, title, author, copies)
+        
+        elif choice == "2":
+            book_id = input("Book ID: ")
+            student_id = input("Your Student ID: ")
+            lib.borrow_book(book_id, student_id)
+        
+        elif choice == "3":
+            book_id = input("Book ID: ")
+            student_id = input("Your Student ID: ")
+            lib.return_book(book_id, student_id)
+        
+        elif choice == "4":
+            keyword = input("Search keyword: ")
+            results = lib.search(keyword)
+            if results:
+                print(f"\nFound {len(results)} book(s):")
+                for book in results:
+                    print(book)
+            else:
+                print("No books found!")
+        
+        elif choice == "5":
+            lib.list_books()
+        
+        elif choice == "6":
+            lib.overdue_books()
+        
+        elif choice == "7":
+            print("Goodbye!")
+            break
+        
+        else:
+            print("Invalid choice!")
+
+if __name__ == "__main__":
+    main()
+</script>
+
+<div class="exercise">
+<strong>Extensions to try:</strong>
+<ol>
+<li>Add a Student class to track multiple books per student</li>
+<li>Add late fee calculation (Rs. 5 per day overdue)</li>
+<li>Add book categories (Fiction, Science, History, etc.)</li>
+<li>Generate a monthly report of all transactions</li>
+<li>Add a reservation system for books that are checked out</li>
+</ol>
+</div>
+</div>
+
+<div class="project-box">
+<div class="project-title">Project 7: NumPy + Pandas: Sales Dashboard</div>
+<p><strong>Level:</strong> Advanced | <strong>Topics:</strong> NumPy, Pandas, groupby, pivot tables, time series, analysis</p>
+
+<script type="text/plain" class="pycode">
+import numpy as np
+import pandas as pd
+
+# Create realistic sales data for a shop
+np.random.seed(42)
+
+products = ["Rice", "Wheat", "Sugar", "Oil", "Soap", "Shampoo", "Toothpaste", "Biscuits"]
+cities = ["Delhi", "Mumbai", "Chennai", "Kolkata", "Bangalore"]
+n_records = 1000
+
+# Generate dates for 1 year
+dates = pd.date_range("2024-01-01", periods=n_records, freq="H")
+# Sample 1000 random dates with replacement
+sales_dates = np.random.choice(dates, n_records)
+
+sales_data = pd.DataFrame({
+    "Date": sales_dates,
+    "Product": np.random.choice(products, n_records),
+    "City": np.random.choice(cities, n_records),
+    "Quantity": np.random.randint(1, 20, n_records),
+    "Unit_Price": np.random.choice([50, 100, 150, 200, 250, 300, 500], n_records),
+    "Discount_%": np.random.choice([0, 5, 10, 15, 20], n_records, p=[0.4, 0.3, 0.15, 0.1, 0.05])
+})
+
+# Calculate Total and Net Amount
+sales_data["Total"] = sales_data["Quantity"] * sales_data["Unit_Price"]
+sales_data["Discount_Amount"] = sales_data["Total"] * sales_data["Discount_%"] / 100
+sales_data["Net_Amount"] = sales_data["Total"] - sales_data["Discount_Amount"]
+
+# Sort by date
+sales_data.sort_values("Date", inplace=True)
+sales_data.reset_index(drop=True, inplace=True)
+
+print("Sales Data Sample:")
+print(sales_data.head(10))
+print(f"\nTotal Records: {len(sales_data)}")
+
+# ANALYSIS
+print("\n" + "=" * 60)
+print("           SALES DASHBOARD ANALYSIS")
+print("=" * 60)
+
+# 1. Total Revenue
+print(f"\n1. Total Revenue: Rs.{sales_data['Net_Amount'].sum():,.2f}")
+print(f"   Total Discounts Given: Rs.{sales_data['Discount_Amount'].sum():,.2f}")
+
+# 2. Top Products by Revenue
+print("\n2. Top Products by Revenue:")
+product_revenue = sales_data.groupby("Product")["Net_Amount"].sum().sort_values(ascending=False)
+print(product_revenue.apply(lambda x: f"Rs.{x:,.2f}"))
+
+# 3. Top Cities by Revenue
+print("\n3. Top Cities by Revenue:")
+city_revenue = sales_data.groupby("City")["Net_Amount"].sum().sort_values(ascending=False)
+print(city_revenue.apply(lambda x: f"Rs.{x:,.2f}"))
+
+# 4. Monthly Sales Trend
+print("\n4. Monthly Sales Trend:")
+monthly_sales = sales_data.resample("M", on="Date")["Net_Amount"].sum()
+for month, amount in monthly_sales.items():
+    print(f"   {month.strftime('%Y-%m')}: Rs.{amount:,.2f}")
+
+# 5. Product-City Cross Analysis (Pivot Table)
+print("\n5. Product Sales by City (Pivot Table):")
+pivot = pd.pivot_table(sales_data, values="Net_Amount", index="Product", columns="City", aggfunc="sum", fill_value=0)
+print(pivot.applymap(lambda x: f"Rs.{x:,.0f}"))
+
+# 6. Average Order Value
+print(f"\n6. Average Order Value: Rs.{sales_data['Net_Amount'].mean():,.2f}")
+print(f"   Average Items per Order: {sales_data['Quantity'].mean():.1f}")
+
+# 7. Discount Analysis
+print("\n7. Impact of Discounts:")
+discount_analysis = sales_data.groupby("Discount_%")["Net_Amount"].agg(["count", "sum"])
+discount_analysis.columns = ["Orders", "Revenue"]
+print(discount_analysis)
+
+# 8. Peak Sales Hour
+sales_data["Hour"] = sales_data["Date"].dt.hour
+hourly = sales_data.groupby("Hour")["Net_Amount"].sum().sort_values(ascending=False)
+print(f"\n8. Peak Sales Hour: {hourly.index[0]}:00 (Rs.{hourly.iloc[0]:,.2f})")
+
+# 9. Quantity vs Revenue correlation
+print(f"\n9. Correlation (Quantity vs Revenue): {sales_data['Quantity'].corr(sales_data['Net_Amount']):.3f}")
+
+# 10. Best selling day
+best_day = sales_data.groupby(sales_data["Date"].dt.date)["Net_Amount"].sum().sort_values(ascending=False).head(5)
+print("\n10. Top 5 Sales Days:")
+for date, amount in best_day.items():
+    print(f"    {date}: Rs.{amount:,.2f}")
+
+# Save results
+sales_data.to_csv("sales_data.csv", index=False)
+product_revenue.to_csv("product_revenue.csv")
+monthly_sales.to_csv("monthly_sales.csv")
+print("\nAll data saved to CSV files!")
+</script>
+
+<div class="exercise">
+<strong>Extensions to try:</strong>
+<ol>
+<li>Add a profit margin column and calculate total profit</li>
+<li>Identify slow-moving products (low quantity sold)</li>
+<li>Predict next month's sales using a simple moving average</li>
+<li>Create a customer segmentation analysis</li>
+<li>Build a dashboard using streamlit or plotly</li>
+</ol>
+</div>
+</div>
+
+<h3>How to Continue Learning</h3>
+
+<div class="tip">
+<ol>
+<li><strong>Practice every day:</strong> Even 30 minutes of coding is better than 3 hours once a week.</li>
+<li><strong>Build projects:</strong> Don't just read. Build something. Break it. Fix it.</li>
+<li><strong>Read others' code:</strong> Go to GitHub and read Python projects. Learn from experts.</li>
+<li><strong>Join communities:</strong> Stack Overflow, Reddit r/learnpython, Discord servers.</li>
+<li><strong>Contribute to open source:</strong> Even fixing a typo in documentation counts!</li>
+<li><strong>Learn Git:</strong> Version control is essential for every programmer.</li>
+<li><strong>Never stop:</strong> Technology changes fast. Keep learning new libraries and tools.</li>
+</ol>
+</div>
+
+<div class="note">
+<strong>Remember:</strong> Every expert was once a beginner. Don't compare your Chapter 1 to someone else's Chapter 20. Keep coding, keep building, and you'll be amazed at how far you can go!
+</div>
+
+<p style="text-align:center;font-size:28px;font-family:'Caveat',cursive;margin-top:60px;">
+Happy Coding! 🚀<br>
+<small style="font-size:18px;">- Your Python Notes</small>
+</p>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a079042398ab80c8',t:'MTc4MDc2NTY3Ng=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
