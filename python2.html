@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Python Explained — Handwritten Notes</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Kalam:wght@300;400;700&family=Patrick+Hand&family=Architects+Daughter&display=swap');
+* { box-sizing: border-box; }
+body {
+  font-family: 'Kalam', cursive;
+  background: #fdfbf7;
+  color: #2c3e50;
+  font-size: 17.5px;
+  line-height: 1.85;
+  margin: 0;
+  padding: 50px 70px 50px 90px;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
+  background-image:
+    linear-gradient(90deg, transparent 79px, #e74c3c 79px, #e74c3c 81px, transparent 81px),
+    repeating-linear-gradient(transparent, transparent 33px, #d4e6f1 33px, #d4e6f1 34.5px);
+  background-attachment: local;
+}
+.title-page {
+  text-align: center;
+  padding: 80px 20px;
+  page-break-after: always;
+}
+.title-page h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 72px;
+  color: #c0392b;
+  margin-bottom: 10px;
+  line-height: 1.1;
+  transform: rotate(-1deg);
+}
+.title-page .subtitle {
+  font-family: 'Kalam', cursive;
+  font-size: 28px;
+  color: #2980b9;
+  margin-bottom: 60px;
+  transform: rotate(0.5deg);
+}
+.toc-box {
+  text-align: left;
+  display: inline-block;
+  background: #fff9c4;
+  border: 3px dashed #f1c40f;
+  border-radius: 15px;
+  padding: 25px 40px;
+  margin-top: 30px;
+  transform: rotate(0.5deg);
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.08);
+}
+.toc-box h3 {
+  font-family: 'Caveat', cursive;
+  font-size: 32px;
+  color: #8e44ad;
+  margin-top: 0;
+  border: none;
+}
+.toc-box ol { margin: 0; padding-left: 25px; }
+.toc-box li { margin: 6px 0; font-size: 18px; }
+h1 {
+  font-family: 'Caveat', cursive;
+  font-size: 52px;
+  color: #c0392b;
+  text-align: center;
+  margin: 50px 0 20px 0;
+  line-height: 1.1;
+  transform: rotate(-0.5deg);
+  text-shadow: 1px 1px 0 rgba(0,0,0,0.05);
+}
+h2 {
+  font-family: 'Caveat', cursive;
+  font-size: 38px;
+  color: #2980b9;
+  border-bottom: 3px solid #2980b9;
+  margin-top: 55px;
+  padding-bottom: 8px;
+  line-height: 1.2;
+  transform: rotate(-0.3deg);
+}
+h3 {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 26px;
+  color: #8e44ad;
+  margin-top: 30px;
+  line-height: 1.3;
+  transform: rotate(0.3deg);
+}
+h4 {
+  font-family: 'Architects Daughter', cursive;
+  font-size: 21px;
+  color: #27ae60;
+  margin-top: 22px;
+  line-height: 1.3;
+  transform: rotate(-0.2deg);
+}
+p { margin: 12px 0; }
+ul, ol { margin: 10px 0; padding-left: 30px; }
+li { margin: 5px 0; }
+.pycode {
+  display: block;
+  font-family: 'Courier New', monospace;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  background: #fefcf3;
+  padding: 18px 20px;
+  border: 2px solid #e67e22;
+  border-radius: 8px 15px 12px 6px;
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 16px 0;
+  color: #2c3e50;
+  box-shadow: 3px 4px 0 rgba(230, 126, 34, 0.15);
+  transform: rotate(-0.2deg);
+}
+.output {
+  display: block;
+  background: #e8f8f5;
+  padding: 14px 18px;
+  border: 2px solid #1abc9c;
+  border-radius: 10px 6px 14px 8px;
+  font-size: 14px;
+  margin: 10px 0 16px 0;
+  color: #16a085;
+  font-family: 'Kalam', cursive;
+  box-shadow: 2px 3px 0 rgba(26, 188, 156, 0.12);
+  transform: rotate(0.3deg);
+}
+.note, .warn, .tip, .analogy, .exercise {
+  padding: 16px 20px;
+  margin: 18px 0;
+  border-radius: 10px 14px 8px 12px;
+  font-size: 16.5px;
+  line-height: 1.7;
+  position: relative;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.06);
+}
+.note { background: #fff9c4; border: 2px dashed #f1c40f; transform: rotate(0.4deg); }
+.warn { background: #ffebee; border: 2px dashed #e74c3c; transform: rotate(-0.3deg); }
+.tip { background: #e8f5e9; border: 2px dashed #27ae60; transform: rotate(0.2deg); }
+.analogy { background: #e3f2fd; border: 2px dashed #2196f3; transform: rotate(-0.4deg); }
+.exercise { background: #f3e5f5; border: 2px dashed #9c27b0; transform: rotate(0.3deg); }
+.note::before { content: "📝 NOTE: "; font-weight: 700; color: #b7950b; font-family: 'Architects Daughter', cursive; }
+.warn::before { content: "⚠️ WARNING: "; font-weight: 700; color: #c0392b; font-family: 'Architects Daughter', cursive; }
+.tip::before { content: "💡 TIP: "; font-weight: 700; color: #1e8449; font-family: 'Architects Daughter', cursive; }
+.analogy::before { content: "🧠 ANALOGY: "; font-weight: 700; color: #1a5276; font-family: 'Architects Daughter', cursive; }
+.exercise::before { content: "✏️ TRY THIS: "; font-weight: 700; color: #6c3483; font-family: 'Architects Daughter', cursive; }
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 16px 0;
+  font-size: 15.5px;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.06);
+  transform: rotate(-0.15deg);
+  border-radius: 10px;
+  overflow: hidden;
+}
+th, td {
+  border: 2px solid #bdc3c7;
+  padding: 9px 13px;
+  text-align: left;
+}
+th {
+  background: #ecf0f1;
+  font-weight: 700;
+  font-family: 'Architects Daughter', cursive;
+  font-size: 16px;
+}
+tr:nth-child(even) { background: #fafafa; }
+.page-break { page-break-after: always; }
+hr {
+  border: none;
+  border-top: 2px dashed #bdc3c7;
+  margin: 30px 0;
+  transform: rotate(0.2deg);
+}
+code {
+  font-family: 'Courier New', monospace;
+  background: #fefcf3;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 14px;
+  border: 1px solid #e67e22;
+  color: #c0392b;
+}
+@media print {
+  body { background: white; padding: 30px 50px 30px 70px; font-size: 15px; line-height: 1.75; }
+  h1 { font-size: 44px; }
+  h2 { font-size: 32px; }
+  h3 { font-size: 24px; }
+  h4 { font-size: 19px; }
+  .pycode { font-size: 12px; padding: 14px; }
+  .note, .warn, .tip, .analogy, .exercise { transform: none; }
+  .toc-box { transform: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="title-page">
+  <h1>Advanced Python<br>Explained in Detail</h1>
+  <div class="subtitle">Like a Personal Tutor — Handwritten Notes</div>
+  <div class="toc-box">
+    <h3>📚 Contents</h3>
+    <ol>
+      <li>Advanced Data Structures</li>
+      <li>Functions: Beyond Basics</li>
+      <li>OOP: The Full Picture</li>
+      <li>File Handling & Exceptions</li>
+      <li>Iterators, Generators & Lazy Evaluation</li>
+      <li>Decorators Explained</li>
+      <li>Context Managers</li>
+      <li>Regular Expressions</li>
+      <li>Standard Library Power Tools</li>
+      <li>Memory, Performance & Type Hints</li>
+      <li>Concurrency: Threading, Multiprocessing, Asyncio</li>
+      <li>Testing & Profiling</li>
+      <li>Design Patterns</li>
+      <li>NumPy Deep Dive</li>
+      <li>Pandas Deep Dive</li>
+    </ol>
+  </div>
+  <div style="margin-top:100px;font-family:'Patrick Hand',cursive;font-size:20px;color:#7f8c8d;">For Class 10 & Beginners | Written with ❤️</div>
+</div>
+
+<div class="page-break"></div>
+
+<h1>1. Advanced Data Structures</h1>
+
+<h3>1.1 List Comprehensions — Why They Exist</h3>
+<p><strong>What is it?</strong> A list comprehension is a compact way to create a new list by transforming or filtering an existing sequence. It replaces 3-4 lines of loop code with a single, readable line.</p>
+
+<div class="analogy">Think of a list comprehension as a factory assembly line. Instead of having one worker pick items one by one (a for loop), you have a conveyor belt that automatically transforms each item as it passes through, and a filter that kicks off unwanted items.</div>
+
+<div class="pycode"># Without comprehension: 4 lines, easy to get lost
+result = []
+for x in range(100):
+    if x % 2 == 0:
+        result.append(x * 2)
+
+# With comprehension: 1 line, crystal clear
+result = [x * 2 for x in range(100) if x % 2 == 0]</div>
+
+<div class="pycode"># Syntax breakdown:
+# [expression for item in iterable if condition]
+#     ↑           ↑            ↑         ↑
+#  what to do | each item | source | filter (optional)
+
+# Nested comprehension: multiplication table (1-5)
+table = [[i * j for j in range(1, 6)] for i in range(1, 6)]
+# Outer 'for i' runs first. For each i, inner 'for j' runs completely.
+# Same as nested loops but written in one beautiful line.</div>
+
+<div class="tip">Use list comprehensions when the logic is simple enough to fit in one line. If it gets too complex, a regular for loop is more readable.</div>
+
+<h3>1.2 Dictionary & Set Comprehensions</h3>
+<div class="pycode"># Dictionary comprehension: map words to their lengths
+words = ["apple", "banana", "cherry"]
+lengths = {word: len(word) for word in words}
+# {'apple': 5, 'banana': 6, 'cherry': 6}
+
+# Set comprehension: unique first letters (no duplicates!)
+first_letters = {word[0] for word in ["apple", "apricot", "banana", "cherry"]}
+# {'a', 'b', 'c'} — duplicates automatically removed!</div>
+
+<h3>1.3 Generator Expressions — The Lazy Version</h3>
+<div class="analogy">A generator expression is like a Netflix stream. It doesn't download the entire movie first — it plays one chunk at a time. A list comprehension downloads the entire movie (stores all values in memory) before you can watch anything.</div>
+
+<div class="pycode"># Parentheses instead of brackets = generator
+gen = (x**2 for x in range(1000000))
+# This does NOT create a list in memory!
+# It calculates each value only when you ask for it.
+
+print(sum(gen))  # Adds all squares without storing them!
+# This is how you process billion-item datasets on a normal laptop!</div>
+
+<div class="note">Key Insight: A list comprehension creates the entire list immediately (eager). A generator expression calculates values one at a time (lazy). Use generators for huge data to save RAM.</div>
+
+<h3>1.4 Shallow Copy vs Deep Copy — The Trap Every Programmer Falls Into</h3>
+<div class="analogy">When you assign b = a, you're not creating a new list. You're creating a new name tag stuck on the SAME box. Changing the contents through b means a also sees it because it's the SAME box.</div>
+
+<div class="pycode">a = [1, 2, 3]
+b = a
+b[0] = 999
+print(a)  # [999, 2, 3] — a changed too! 😱
+# Why? a and b are name tags on the SAME list object.</div>
+
+<div class="pycode">import copy
+
+# Shallow copy: new outer list, but inner items are still references
+original = [[1, 2], [3, 4]]
+shallow = copy.copy(original)  # or original[:], or list(original)
+
+shallow[0] = [9, 9]       # Replacing entire inner list → original unaffected
+shallow[1][0] = 999       # Modifying inside inner list → original CHANGES! 😱
+# Why? shallow[1] still points to the SAME inner list as original[1].</div>
+
+<div class="pycode"># Deep copy: recursively creates completely new copies of everything
+deep = copy.deepcopy(original)
+deep[1][0] = 111
+print(original)  # [[1, 2], [3, 4]] — completely unaffected! ✅</div>
+
+<table>
+<tr><th>Method</th><th>What it does</th><th>Use when</th></tr>
+<tr><td><code>b = a</code></td><td>Same object, two names</td><td>Never if you want a copy</td></tr>
+<tr><td><code>.copy()</code></td><td>New outer list, shared inner items</td><td>Flat lists only</td></tr>
+<tr><td><code>copy.deepcopy()</code></td><td>Everything is brand new</td><td>Nested lists, dicts, objects</td></tr>
+</table>
+
+<div class="warn">For simple lists, .copy() is fine. For nested lists, dictionaries inside lists, or objects, always use copy.deepcopy()!</div>
+
+<h3>1.5 Tuples — Immutable for a Reason</h3>
+<div class="analogy">Tuples are immutable (cannot change) which makes them hashable. Being hashable means they can be used as keys in dictionaries and elements in sets. Lists cannot be used as dictionary keys because they can change, which would break the dictionary's internal lookup system.</div>
+
+<div class="pycode"># Valid: tuple as dictionary key
+locations = {
+    (0, 0): "Origin",
+    (12.97, 77.59): "Bangalore",
+    (28.61, 77.20): "Delhi"
+}
+
+# Invalid: list as dictionary key
+locations[[0, 0]] = "Origin"  # TypeError: unhashable type: 'list'</div>
+
+<div class="pycode"># Named Tuples — Self-Documenting Code
+from collections import namedtuple
+Person = namedtuple("Person", ["name", "age", "city"])
+p = Person("Rahul", 15, "Delhi")
+print(p.name)   # Rahul — readable! No more remembering p[0] is name!</div>
+
+<h3>1.6 Dictionaries — How They Actually Work</h3>
+<p><strong>How Python finds values so fast:</strong> Dictionaries use a <strong>hash table</strong>. When you do <code>my_dict["key"]</code>, Python doesn't search one by one. Instead, it:</p>
+<ol>
+<li>Converts "key" into a number (hash) using a hash function</li>
+<li>Uses that number to jump directly to the right storage location</li>
+<li>This is O(1) — constant time — meaning it takes the same time whether the dictionary has 10 items or 10 million items!</li>
+</ol>
+
+<div class="pycode">student = {"name": "Rahul", "age": 15}
+
+# .get() — safe access, no crash if missing!
+student.get("salary", 0)  # Returns 0 if key doesn't exist
+
+# .setdefault() — set only if missing
+student.setdefault("grade", "A")  # Only adds if "grade" not already present
+
+# .update() — merge dictionaries (overwrites existing keys!)
+new_info = {"city": "Delhi", "age": 16}  # age will be overwritten!
+student.update(new_info)
+
+# .popitem() — removes MOST RECENTLY added item (LIFO in Python 3.7+)
+last = student.popitem()</div>
+
+<div class="tip">Use dict comprehension with zip to create dictionaries from two lists: {name: mark for name, mark in zip(names, marks)}</div>
+
+<div class="page-break"></div>
+
+<h1>2. Functions: Beyond the Basics</h1>
+
+<h3>2.1 *args — Any Number of Arguments</h3>
+<div class="analogy">The * tells Python: "Take all remaining positional arguments and pack them into a tuple." It's like saying "put all leftover items into a bag."</div>
+
+<div class="pycode">def total_sum(*numbers):
+    result = 0
+    for num in numbers:
+        result += num
+    return result
+
+print(total_sum(1, 2, 3))       # 6
+print(total_sum(10, 20, 30, 40, 50))  # 150
+# numbers is a tuple: (1, 2, 3) or (10, 20, 30, 40, 50)</div>
+
+<div class="pycode"># Unpacking with *: spread a list into individual arguments
+values = [1, 2, 3, 4, 5]
+total_sum(*values)  # Same as total_sum(1, 2, 3, 4, 5)
+# The * unpacks the list into separate arguments!</div>
+
+<h3>2.2 **kwargs — Any Number of Named Arguments</h3>
+<div class="pycode">def student_info(**kwargs):
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+student_info(name="Rahul", age=15, city="Delhi")
+# kwargs = {'name': 'Rahul', 'age': 15, 'city': 'Delhi'}
+
+# Unpacking with **: spread a dictionary into named arguments
+info = {"name": "Rahul", "age": 15}
+student_info(**info)  # Same as student_info(name="Rahul", age=15)</div>
+
+<h3>2.3 Keyword-Only Arguments (For Safety)</h3>
+<div class="pycode">def send_email(to, subject, *, priority="normal", encrypt=False):
+    pass
+
+# Everything after * MUST be named!
+send_email("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="0e6c617d7d4e6d61637e6f6077206d6163">[email&#160;protected]</a>", "Report", priority="high", encrypt=True)
+send_email("<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="dbb9b4a8a89bb8b4b6abbab5a2f5b8b4b6">[email&#160;protected]</a>", "Report", "high")  # ERROR! "high" is positional</div>
+
+<div class="tip">Keyword-only arguments prevent bugs where someone passes arguments in the wrong order and accidentally changes the meaning of the function call.</div>
+
+<h3>2.4 Closures — Functions Remember Their Birthplace</h3>
+<div class="analogy">A closure is like a student who graduated but still remembers everything from their school. The function "remembers" the variables from the scope where it was created, even when called outside that scope.</div>
+
+<div class="pycode">def make_multiplier(n):
+    """Creates a function that multiplies by n."""
+    def multiplier(x):
+        return x * n  # n is "remembered" from the outer function!
+    return multiplier
+
+double = make_multiplier(2)   # n = 2 is stored in double's memory
+triple = make_multiplier(3)     # n = 3 is stored in triple's memory
+
+print(double(5))  # 10 (5 * 2)
+print(triple(5))  # 15 (5 * 3)
+# How? Python attaches a reference to n in a hidden structure called __closure__</div>
+
+<div class="page-break"></div>
+
+<h1>3. OOP: The Full Picture</h1>
+
+<h3>3.1 Why Use Classes?</h3>
+<div class="analogy">Classes bundle data (attributes) and behavior (methods) together. Instead of keeping parallel lists that can get out of sync, a class represents a complete "thing" in your program.</div>
+
+<div class="pycode"># Without classes: parallel lists, easy to mess up!
+dog_names = ["Buddy", "Max"]
+dog_ages = [3, 5]
+dog_breeds = ["Labrador", "Beagle"]
+# If you sort one list, the others are now wrong! 😱
+
+# With classes: each dog is a complete, self-contained object!
+class Dog:
+    def __init__(self, name, age, breed):
+        self.name = name
+        self.age = age
+        self.breed = breed
+
+buddy = Dog("Buddy", 3, "Labrador")
+max_dog = Dog("Max", 5, "Beagle")
+# Each dog knows everything about itself!</div>
+
+<h3>3.2 self — The Hidden First Argument</h3>
+<p><strong>What is self?</strong> It's a reference to the specific object (instance) calling the method. When you write <code>my_dog.bark()</code>, Python secretly translates this to <code>Dog.bark(my_dog)</code>.</p>
+
+<div class="note">Python's creator (Guido van Rossum) believed "explicit is better than implicit." Making self explicit reminds you that methods operate on a specific object, not on some global or hidden state.</div>
+
+<h3>3.3 Class vs Instance Attributes</h3>
+<div class="pycode">class Dog:
+    species = "Canis familiaris"  # Class attribute — stored ONCE, shared by ALL dogs
+    
+    def __init__(self, name):
+        self.name = name          # Instance attribute — stored SEPARATELY for each dog</div>
+
+<div class="tip">Class attributes are stored once in memory and shared. Instance attributes are stored separately for each object. If you modify a class attribute through the class, all instances see it. If you modify it through an instance, Python creates a new instance attribute that shadows the class attribute.</div>
+
+<h3>3.4 Encapsulation — Private Variables</h3>
+<p>Python doesn't have true privacy like Java. Instead, it uses <strong>conventions</strong> and <strong>name mangling</strong>.</p>
+
+<div class="pycode">class BankAccount:
+    def __init__(self, balance):
+        self._balance = balance        # Single underscore: "internal use, don't touch"
+        self.__pin = "1234"            # Double underscore: name mangling
+    
+    def get_balance(self):
+        return self._balance
+
+# Single underscore _balance: A signal to other programmers. Python won't stop you.
+# Double underscore __pin: Python renames it to _BankAccount__pin. This prevents
+# accidental access from outside the class, but a determined programmer can still
+# access it via account._BankAccount__pin</div>
+
+<div class="note">Python Philosophy: "We're all consenting adults here." Python trusts you to not touch private variables, but doesn't make it impossible if you really need to.</div>
+
+<h3>3.5 Properties — Controlled Access</h3>
+<div class="analogy">A property is like a smart door. When someone knocks (reads the value), the door can check who it is. When someone tries to enter (writes a value), the door can check if they have the right key.</div>
+
+<div class="pycode">class Temperature:
+    def __init__(self, celsius):
+        self._celsius = celsius
+    
+    @property
+    def celsius(self):
+        return self._celsius
+    
+    @celsius.setter
+    def celsius(self, value):
+        if value < -273.15:
+            raise ValueError("Temperature below absolute zero is impossible!")
+        self._celsius = value
+    
+    @property
+    def fahrenheit(self):
+        return self._celsius * 9/5 + 32
+
+t = Temperature(25)
+print(t.celsius)      # 25 — calls the getter method, looks like an attribute!
+t.celsius = 30        # calls the setter, validates automatically!
+print(t.fahrenheit)   # 86.0 — calculated on the fly, no storage needed!</div>
+
+<div class="tip">With properties, you can add validation, logging, or calculation to attribute access without changing the interface. Users don't need to know if t.celsius is a simple attribute or a method with logic behind it.</div>
+
+<h3>3.6 Inheritance & MRO (Method Resolution Order)</h3>
+<div class="pycode">class Animal:
+    def __init__(self, name):
+        self.name = name
+    def speak(self):
+        raise NotImplementedError("Subclasses must implement this!")
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)      # Call parent constructor
+        self.breed = breed
+    def speak(self):
+        return f"{self.name} says Woof!"
+
+print(Dog.__mro__)
+# (<class 'Dog'>, <class 'Animal'>, <class 'object'>)</div>
+
+<div class="note">MRO uses the C3 Linearization algorithm: a class is checked before its parents, parent order is preserved, and no class is checked twice.</div>
+
+<h3>3.7 Abstract Base Classes (ABC)</h3>
+<div class="analogy">An abstract class is like a contract. It says: "Any class that inherits from me MUST implement these methods." You cannot create an instance of an abstract class directly.</div>
+
+<div class="pycode">from abc import ABC, abstractmethod
+
+class Shape(ABC):
+    @abstractmethod
+    def area(self): pass
+    @abstractmethod
+    def perimeter(self): pass
+
+class Rectangle(Shape):
+    def __init__(self, w, h):
+        self.w = w; self.h = h
+    def area(self): return self.w * self.h
+    def perimeter(self): return 2*(self.w+self.h)
+
+# r = Shape()  # ERROR! Cannot instantiate abstract class
+r = Rectangle(5, 3)  # Works! Both methods implemented.</div>
+
+<div class="tip">ABCs prevent mistakes. If a programmer forgets to implement area() in a new shape, Python gives a clear error immediately when they try to create the object, rather than failing mysteriously later.</div>
+
+<h3>3.8 Dataclasses — Less Boilerplate</h3>
+<div class="pycode">from dataclasses import dataclass, field
+from typing import List
+
+@dataclass(frozen=True)  # frozen = immutable! Like a tuple with named fields.
+class Point:
+    x: float
+    y: float = 0.0  # Default value
+
+@dataclass
+class Student:
+    name: str
+    age: int = 15
+    subjects: List[str] = field(default_factory=list)
+    # default_factory is needed because [] as a default would be shared!
+
+s = Student("Rahul")
+print(s)  # Student(name='Rahul', age=15, subjects=[])</div>
+
+<div class="note">Dataclass auto-generates: __init__ (constructor), __repr__ (printable), __eq__ (comparison), and __hash__ (if frozen=True). Huge time saver!</div>
+
+<div class="page-break"></div>
+
+<h1>4. File Handling & Exceptions</h1>
+
+<h3>4.1 The with Statement — Why It Exists</h3>
+<div class="analogy">The with statement is like a smart assistant who opens the door for you, lets you do your work, and then closes the door behind you — even if you panic and run away (an exception occurs).</div>
+
+<div class="pycode"># DANGEROUS — file might never close if an error occurs!
+f = open("data.txt")
+data = f.read()
+# If error happens here, f.close() never runs! Resource leak! 😱
+f.close()
+
+# SAFE — with uses a context manager that auto-closes!
+with open("data.txt") as f:
+    data = f.read()
+# f.close() is called AUTOMATICALLY here, even if an error happened!</div>
+
+<p><strong>How it works:</strong> <code>open()</code> returns a file object with <code>__enter__()</code> and <code>__exit__()</code> methods. <code>with</code> calls <code>__enter__()</code> when entering the block, and <code>__exit__()</code> when leaving, regardless of how the block is exited (normal finish, return, break, or exception).</p>
+
+<h3>4.2 pathlib — The Modern Way</h3>
+<div class="pycode">from pathlib import Path
+
+p = Path("folder") / "subfolder" / "file.txt"
+# Works on Windows, Mac, Linux! No more \\ vs / confusion!
+
+print(p.exists())           # True/False
+print(p.parent)             # folder/subfolder
+print(p.stem)               # file
+print(p.suffix)             # .txt
+
+for file in Path(".").glob("*.py"):
+    print(file.read_text())</div>
+
+<div class="tip">pathlib is better than os.path! It handles Windows (\) and Linux/Mac (/) paths automatically. It's the recommended way in modern Python (PEP 428).</div>
+
+<h3>4.3 Exception Hierarchy</h3>
+<div class="pycode">BaseException
+├── SystemExit          # Raised by sys.exit()
+├── KeyboardInterrupt   # Ctrl+C
+├── GeneratorExit       # Generator's close() method
+└── Exception
+    ├── ArithmeticError
+    │   ├── ZeroDivisionError
+    │   └── OverflowError
+    ├── LookupError
+    │   ├── IndexError        # List index out of range
+    │   └── KeyError          # Dictionary key missing
+    ├── TypeError             # Wrong type (e.g., "2" + 2)
+    ├── ValueError            # Right type, wrong value
+    ├── AttributeError        # Missing attribute
+    ├── FileNotFoundError     # File doesn't exist
+    ├── PermissionError       # No permission
+    └── ImportError
+        └── ModuleNotFoundError</div>
+
+<div class="warn">Catch the most specific exception possible. Don't catch bare Exception unless you have a very good reason — it might catch unexpected errors and hide bugs!</div>
+
+<h3>4.4 Custom Exceptions</h3>
+<div class="pycode">class InsufficientFundsError(Exception):
+    """Raised when a withdrawal exceeds the account balance."""
+    def __init__(self, balance, requested):
+        self.balance = balance
+        self.requested = requested
+        super().__init__(f"Balance ₹{balance} is less than requested ₹{requested}")
+
+class AccountFrozenError(Exception):
+    """Raised when trying to use a frozen account."""
+    pass
+
+def withdraw(balance, amount):
+    if amount < 0:
+        raise ValueError("Amount cannot be negative!")
+    if amount > balance:
+        raise InsufficientFundsError(balance, amount)
+    return balance - amount</div>
+
+<div class="note">Custom exceptions make code more readable and let callers catch specific errors. They communicate domain-specific errors clearly.</div>
+
+<div class="page-break"></div>
+
+<h1>5. Iterators, Generators & Lazy Evaluation</h1>
+
+<h3>5.1 What is an Iterator?</h3>
+<div class="analogy">An iterator is like a vending machine that dispenses one item at a time. You keep pressing the button (calling next()) and it gives you one item. When it's empty, it says "Stop!" (StopIteration).</div>
+
+<div class="pycode">class Countdown:
+    def __init__(self, start):
+        self.count = start
+    def __iter__(self):
+        return self
+    def __next__(self):
+        if self.count <= 0:
+            raise StopIteration
+        self.count -= 1
+        return self.count + 1
+
+for num in Countdown(5):
+    print(num)  # 5, 4, 3, 2, 1</div>
+
+<h3>5.2 Generators — Simpler Iterators</h3>
+<div class="analogy">A generator is a function that freezes in place when it hits yield, like a video game pausing. The next time you call next(), it unpauses and continues from where it left off.</div>
+
+<div class="pycode">def countdown(n):
+    while n > 0:
+        yield n
+        n -= 1
+
+gen = countdown(5)
+print(next(gen))  # 5
+print(next(gen))  # 4
+# What's happening? Python creates a generator object, freezes the function's
+# entire state (local variables, instruction pointer) at yield, and resumes
+# from the line AFTER yield when you call next() again.</div>
+
+<h3>5.3 Generator Expressions — Memory Magic</h3>
+<div class="pycode"># List: stores all values in memory immediately
+squares_list = [x**2 for x in range(1000000)]  # Uses ~38MB RAM
+
+# Generator: calculates on demand
+squares_gen = (x**2 for x in range(1000000))   # Uses ~120 bytes!
+
+# You can still iterate, sum, or process it
+print(sum(squares_gen))  # Computes each square, adds it, discards it</div>
+
+<div class="tip">Use generator expressions for huge data. They save enormous amounts of RAM by calculating values one at a time instead of storing everything.</div>
+
+<h3>5.4 yield from — Delegating to Another Generator</h3>
+<div class="pycode">def combined():
+    yield from range(3)        # Delegates to range's generator
+    yield from ["a", "b", "c"] # Delegates to list's iterator
+
+print(list(combined()))   # [0, 1, 2, 'a', 'b', 'c']</div>
+
+<h3>5.5 Coroutines — Generators That Receive Data</h3>
+<div class="pycode">def accumulator():
+    total = 0
+    while True:
+        value = yield total  # sends out total, receives value via send()
+        if value is None:
+            break
+        total += value
+
+acc = accumulator()
+next(acc)           # Prime the generator (must call next() before send()!)
+print(acc.send(10))  # 10
+print(acc.send(20))  # 30
+print(acc.send(5))   # 35
+acc.close()</div>
+
+<div class="note">Coroutines are the foundation of asyncio. They can pause execution, wait for data, and resume — perfect for handling thousands of network connections without blocking.</div>
+
+<div class="page-break"></div>
+
+<h1>6. Decorators Explained</h1>
+
+<h3>6.1 What is a Decorator?</h3>
+<div class="analogy">A decorator is like wrapping a gift. The original function is still inside, but now it has extra packaging. You can add timing, logging, validation, or retry logic without changing the original function.</div>
+
+<div class="pycode">def my_decorator(func):
+    def wrapper():
+        print("Before the function runs")
+        func()
+        print("After the function runs")
+    return wrapper
+
+@my_decorator
+def say_hello():
+    print("Hello!")
+
+# What @my_decorator actually does:
+# say_hello = my_decorator(say_hello)
+# The wrapper function is returned and assigned back to say_hello</div>
+
+<h3>6.2 Preserving Function Metadata</h3>
+<div class="warn">Without @wraps, the wrapper function replaces the original function. help(), __name__, and __doc__ show the wrapper's info instead of the original's. Debugging becomes impossible!</div>
+
+<div class="pycode">from functools import wraps
+
+def timer(func):
+    @wraps(func)  # Copies __name__, __doc__, etc. from func to wrapper!
+    def wrapper(*args, **kwargs):
+        import time
+        start = time.perf_counter()
+        result = func(*args, **kwargs)
+        elapsed = time.perf_counter() - start
+        print(f"{func.__name__} took {elapsed:.4f}s")
+        return result
+    return wrapper
+
+@timer
+def slow_add(a, b):
+    """Add two numbers slowly."""
+    time.sleep(0.1)
+    return a + b
+
+print(slow_add.__name__)  # slow_add (not "wrapper"!)
+print(slow_add.__doc__)   # Add two numbers slowly.</div>
+
+<div class="tip">Always use @wraps! Without it, all decorated functions look the same in stack traces and documentation. This is one of the most common beginner decorator mistakes.</div>
+
+<h3>6.3 Parameterized Decorators</h3>
+<div class="pycode">def repeat(times):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for _ in range(times):
+                result = func(*args, **kwargs)
+            return result
+        return wrapper
+    return decorator
+
+@repeat(3)
+def greet(name):
+    print(f"Hello {name}!")
+
+greet("Rahul")
+# Hello Rahul!
+# Hello Rahul!
+# Hello Rahul!
+
+# How it works:
+# repeat(3) is called first, returns the decorator function
+# @decorator is applied to greet
+# The wrapper function knows times = 3 because of closure!</div>
+
+<h3>6.4 Class-Based Decorators</h3>
+<div class="pycode">class CountCalls:
+    def __init__(self, func):
+        self.func = func
+        self.count = 0
+    
+    def __call__(self, *args, **kwargs):
+        self.count += 1
+        print(f"Call {self.count} of {self.func.__name__}")
+        return self.func(*args, **kwargs)
+
+@CountCalls
+def say_hello():
+    print("Hello!")
+
+say_hello()  # Call 1 of say_hello
+say_hello()  # Call 2 of say_hello
+print(say_hello.count)  # 2</div>
+
+<div class="note">Class-based decorators are useful when you need to maintain state (like a call count) between invocations. The instance stores the state, and __call__ makes it behave like a function.</div>
+
+<div class="page-break"></div>
+
+<h1>7. Context Managers</h1>
+
+<h3>7.1 Why Context Managers?</h3>
+<div class="analogy">Many resources need setup and cleanup: files (open → close), locks (acquire → release), database connections (connect → disconnect). If an exception occurs between setup and cleanup, the cleanup is skipped. Context managers guarantee cleanup.</div>
+
+<h3>7.2 Class-Based Context Manager</h3>
+<div class="pycode">class ManagedFile:
+    def __init__(self, filename):
+        self.filename = filename
+        self.file = None
+    
+    def __enter__(self):
+        # Setup code — runs when entering 'with' block
+        self.file = open(self.filename, 'r')
+        return self.file  # This is what the 'as' variable gets
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        # Cleanup code — runs when exiting 'with' block
+        # exc_type, exc_val, exc_tb are exception info (None if no exception)
+        if self.file:
+            self.file.close()
+        return False  # Return False to let exceptions propagate
+
+with ManagedFile("data.txt") as f:
+    data = f.read()
+# f.close() is guaranteed to run here, even if an error occurred!</div>
+
+<h3>7.3 @contextmanager — The Easy Way</h3>
+<div class="pycode">from contextlib import contextmanager
+
+@contextmanager
+def managed_file(filename):
+    f = open(filename, 'r')
+    try:
+        yield f  # This is the 'as' variable
+    finally:
+        f.close()  # Guaranteed to run!
+
+with managed_file("data.txt") as f:
+    data = f.read()
+
+# How it works:
+# Code before yield = __enter__
+# yield pauses, sends value to 'with' block
+# Code after yield (in finally) = __exit__</div>
+
+<h3>7.4 Multiple Resources</h3>
+<div class="pycode">with open("input.txt") as infile, open("output.txt", "w") as outfile:
+    for line in infile:
+        outfile.write(line.upper())
+
+# Both files are opened. Both are guaranteed to close.
+# If opening output.txt fails, input.txt is still properly closed
+# because context managers are entered left-to-right and exited right-to-left.</div>
+
+<div class="page-break"></div>
+
+<h1>8. Regular Expressions</h1>
+
+<h3>8.1 What is Regex?</h3>
+<div class="analogy">Regular expressions are a domain-specific language for describing text patterns. Instead of writing many lines of string manipulation code, you write one pattern that describes what you're looking for. It's like a search query with superpowers.</div>
+
+<h3>8.2 Core Syntax Explained</h3>
+<table>
+<tr><th>Symbol</th><th>Meaning</th><th>Example</th><th>Matches</th></tr>
+<tr><td><code>.</code></td><td>Any character</td><td><code>a.b</code></td><td>"aab", "acb", "a1b"</td></tr>
+<tr><td><code>^</code></td><td>Start of string</td><td><code>^Hello</code></td><td>"Hello world"</td></tr>
+<tr><td><code>$</code></td><td>End of string</td><td><code>world$</code></td><td>"Hello world"</td></tr>
+<tr><td><code>\d</code></td><td>Digit (0-9)</td><td><code>\d{3}</code></td><td>"123", "456"</td></tr>
+<tr><td><code>\w</code></td><td>Word character</td><td><code>\w+</code></td><td>"hello", "world_123"</td></tr>
+<tr><td><code>\s</code></td><td>Whitespace</td><td><code>\s+</code></td><td>" ", "\t", "\n"</td></tr>
+<tr><td><code>*</code></td><td>0 or more</td><td><code>a*</code></td><td>"", "a", "aaa"</td></tr>
+<tr><td><code>+</code></td><td>1 or more</td><td><code>a+</code></td><td>"a", "aaa"</td></tr>
+<tr><td><code>?</code></td><td>0 or 1</td><td><code>colou?r</code></td><td>"color", "colour"</td></tr>
+<tr><td><code>{n}</code></td><td>Exactly n</td><td><code>\d{4}</code></td><td>"2024"</td></tr>
+<tr><td><code>{n,m}</code></td><td>Between n and m</td><td><code>\d{2,4}</code></td><td>"12", "123", "1234"</td></tr>
+<tr><td><code>[]</code></td><td>Character class</td><td><code>[aeiou]</code></td><td>Any vowel</td></tr>
+<tr><td><code>[^]</code></td><td>Negated class</td><td><code>[^0-9]</code></td><td>Any non-digit</td></tr>
+<tr><td><code>()</code></td><td>Capture group</td><td><code>(\d{3})-(\d{4})</code></td><td>Extracts parts</td></tr>
+<tr><td><code>\|</code></td><td>OR</td><td><code>cat\|dog</code></td><td>"cat" or "dog"</td></tr>
+</table>
+
+<h3>8.3 Practical Examples</h3>
+<div class="pycode">import re
+
+# 1. Validate an Indian phone number
+phone = "+91-98765-43210"
+pattern = r"\+91-\d{5}-\d{5}"
+if re.match(pattern, phone):
+    print("Valid phone number!")
+
+# 2. Extract all email addresses from text
+text = "Contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee9d9b9e9e819c9aae8d81839e8f8097c08d8183">[email&#160;protected]</a> or <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7f0c1e131a0c3f1c10120f1e1106511c1012">[email&#160;protected]</a>"
+emails = re.findall(r"\b[\w.-]+@[\w.-]+\.\w+\b", text)
+print(emails)  # ['<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdbeb8bdbda2bfb98daea2a0bdaca3b4e3aea2a0">[email&#160;protected]</a>', '<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="087b69646d7b486b676578696671266b6765">[email&#160;protected]</a>']
+
+# 3. Extract date components (DD-MM-YYYY)
+date = "25-12-2024"
+match = re.match(r"(\d{2})-(\d{2})-(\d{4})", date)
+if match:
+    day, month, year = match.groups()
+    print(f"Day: {day}, Month: {month}, Year: {year}")
+
+# 4. Replace all variations of "color" (case insensitive)
+text = "I like color, colour, and COLOR"
+new_text = re.sub(r"colou?r", "hue", text, flags=re.IGNORECASE)
+print(new_text)  # "I like hue, hue, and hue"
+
+# 5. Compile for speed (use same pattern many times)
+email_pattern = re.compile(r"\b[\w.-]+@[\w.-]+\.\w+\b")
+email_pattern.findall(text1)
+email_pattern.findall(text2)
+email_pattern.findall(text3)</div>
+
+<div class="tip">Compile patterns if you use them multiple times. re.compile converts the regex string into an internal bytecode once. Without compiling, Python does this conversion every time you call findall or match.</div>
+
+<div class="page-break"></div>
+
+<h1>9. Standard Library Power Tools</h1>
+
+<h3>9.1 itertools — Iterator Tools</h3>
+<div class="pycode">import itertools
+
+# count(start, step) — infinite counter
+counter = itertools.count(10, 2)
+for _ in range(5):
+    print(next(counter))  # 10, 12, 14, 16, 18
+
+# cycle(iterable) — repeats forever
+for item in itertools.cycle("AB"):
+    print(item)  # A, B, A, B, ... forever!
+
+# repeat(element, times) — repeats element N times
+print(list(itertools.repeat("X", 5)))  # ['X', 'X', 'X', 'X', 'X']</div>
+
+<div class="pycode"># permutations — all orderings of a specific length
+print(list(itertools.permutations("ABC", 2)))
+# [('A','B'), ('A','C'), ('B','A'), ('B','C'), ('C','A'), ('C','B')]
+# Order matters! AB is different from BA.
+
+# combinations — all groups of a specific length
+print(list(itertools.combinations("ABC", 2)))
+# [('A','B'), ('A','C'), ('B','C')]
+# Order doesn't matter! AB and BA are the same, so only AB appears.
+
+# product — Cartesian product (all combinations)
+print(list(itertools.product("AB", "12")))
+# [('A','1'), ('A','2'), ('B','1'), ('B','2')]
+# Like nested loops: for a in AB: for b in 12: print(a, b)</div>
+
+<div class="tip">itertools operations are written in C and are extremely fast. They also use generators (lazy evaluation), so they work on huge datasets without memory issues.</div>
+
+<h3>9.2 collections — Specialized Containers</h3>
+<div class="pycode">from collections import Counter, defaultdict, deque, namedtuple, ChainMap
+
+# Counter — count occurrences, supports math!
+words = ["apple", "banana", "apple", "cherry", "apple", "banana"]
+counts = Counter(words)
+print(counts.most_common(2))  # [('apple', 3), ('banana', 2)]
+
+# Counter supports math operations!
+a = Counter(["a", "b", "a"])     # {'a': 2, 'b': 1}
+b = Counter(["a", "b", "b", "c"]) # {'a': 1, 'b': 2, 'c': 1}
+print(a + b)  # {'a': 3, 'b': 3, 'c': 1} — add counts
+print(a - b)  # {'a': 1} — subtract (no negative values)
+print(a & b)  # {'a': 1, 'b': 1} — minimum of each
+print(a | b)  # {'a': 2, 'b': 2, 'c': 1} — maximum of each</div>
+
+<div class="pycode"># defaultdict — auto-creates default value!
+# Group words by length
+words = ["cat", "dog", "elephant", "bird", "fish"]
+by_length = defaultdict(list)
+for word in words:
+    by_length[len(word)].append(word)
+print(dict(by_length))
+# {3: ['cat', 'dog'], 8: ['elephant'], 4: ['bird', 'fish']}
+# If a key doesn't exist, defaultdict creates an empty list automatically!</div>
+
+<div class="pycode"># deque — double-ended queue, fast at BOTH ends!
+from collections import deque
+d = deque([1, 2, 3])
+d.appendleft(0)     # Fast! O(1)
+d.append(4)         # Fast! O(1)
+d.pop()             # Fast! O(1)
+d.popleft()         # Fast! O(1)
+d.rotate(1)         # Rotate elements: [1,2,3] → [3,1,2]
+
+# For comparison, list.insert(0, x) is SLOW: O(n) because it shifts all elements!</div>
+
+<div class="tip">Use deque when you need to add/remove from both ends frequently (like a queue, sliding window, or BFS algorithm). list.insert(0) and list.pop(0) are O(n) — very slow for large lists!</div>
+
+<div class="pycode"># ChainMap — search multiple dicts in order!
+defaults = {"theme": "dark", "language": "english", "notifications": True}
+user_settings = {"theme": "light"}
+
+config = ChainMap(user_settings, defaults)
+print(config["theme"])        # "light" — from user_settings
+print(config["language"])     # "english" — from defaults
+print(config["notifications"]) # True — from defaults
+
+# ChainMap is just a view — it doesn't copy data! Very memory efficient.</div>
+
+<div class="page-break"></div>
+
+<h1>10. Memory, Performance & Type Hints</h1>
+
+<h3>10.1 is vs == — Identity vs Equality</h3>
+<div class="pycode">a = [1, 2, 3]
+b = [1, 2, 3]
+c = a
+
+print(a == b)  # True — same VALUES (equality)
+print(a is b)  # False — different OBJECTS in memory (identity)
+print(a is c)  # True — same object! c is just another name for a.
+
+# Use is for: None, True, False (singleton objects)
+# Use == for: Everything else (comparing values)</div>
+
+<div class="tip">is is slightly faster than == because it just compares memory addresses (one integer comparison), while == calls a method that might do complex comparisons.</div>
+
+<h3>10.2 __slots__ — Save Memory</h3>
+<div class="analogy">Normally, every Python object stores its attributes in a dictionary (__dict__), which takes a lot of memory. __slots__ pre-declares the allowed attributes and stores them in a compact array instead — like a spreadsheet instead of a notebook.</div>
+
+<div class="pycode">class Point:
+    __slots__ = ("x", "y")  # Only these two attributes allowed!
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+p = Point(10, 20)
+# p.z = 30  # ERROR! AttributeError: 'Point' object has no attribute 'z'
+# print(p.__dict__)  # ERROR! No __dict__ exists!
+
+# Memory savings: A regular object with two attributes might use ~240 bytes.
+# With __slots__, it uses ~80 bytes. For 1 million objects, that's ~160 MB saved!</div>
+
+<div class="warn">Trade-off: You can't add new attributes dynamically, and the class can't use __dict__ for other features. Only use __slots__ when you have millions of simple objects with fixed attributes.</div>
+
+<h3>10.3 Type Hints — Documenting Intent</h3>
+<div class="analogy">Type hints don't change how Python runs (Python is still dynamically typed). They serve as documentation and enable tools like mypy (a type checker) to catch errors before you run the code. It's like having a proofreader for your code.</div>
+
+<div class="pycode">from typing import List, Dict, Optional, Union, Callable, Tuple, Set, Any
+from typing import TypeVar, Generic, Protocol, NamedTuple
+
+def greet(name: str) -> str:
+    return f"Hello {name}"
+
+# List of integers
+def process(data: List[int]) -> Dict[str, int]:
+    return {"sum": sum(data)}
+
+# Optional = value or None
+def find(x: Optional[int] = None) -> Union[int, str]:
+    return x if x is not None else "missing"
+
+# TypeVar = generic type
+T = TypeVar('T')
+def first(items: List[T]) -> T:
+    return items[0]
+
+# Generic class
+class Stack(Generic[T]):
+    def __init__(self) -> None:
+        self._items: List[T] = []
+    def push(self, item: T) -> None:
+        self._items.append(item)
+    def pop(self) -> T:
+        return self._items.pop()
+
+# Protocol = structural subtyping ("duck typing")
+class Drawable(Protocol):
+    def draw(self) -> None: ...
+
+def render(shape: Drawable) -> None:
+    shape.draw()
+# Any object with a draw() method is a Drawable, even if it doesn't inherit from Drawable!</div>
+
+<div class="page-break"></div>
+
+<h1>11. Concurrency: Threading, Multiprocessing, Asyncio</h1>
+
+<h3>11.1 The GIL — Global Interpreter Lock</h3>
+<div class="analogy">The GIL is like a single microphone in a room. Only one person can speak at a time. Even if there are 8 people (CPU cores), only one can speak (execute Python bytecode) at any given moment.</div>
+
+<p><strong>What is the GIL?</strong> The GIL is a mutex (lock) that prevents multiple threads from executing Python bytecode at the same time. Only one thread can run Python code at any moment.</p>
+
+<p><strong>Why does Python have a GIL?</strong> To simplify memory management. Python's memory allocator isn't thread-safe. The GIL makes it safe by allowing only one thread to manipulate Python objects at a time.</p>
+
+<p><strong>Implication:</strong> In standard Python, threads do NOT give you true parallel execution for CPU-bound tasks. Two threads running Python code on two CPU cores will still run one at a time due to the GIL.</p>
+
+<div class="pycode"># When does the GIL release?
+# - During I/O operations (reading files, network requests)
+# - When calling C libraries that explicitly release the GIL (NumPy, image processing)
+# - During time.sleep()</div>
+
+<h3>11.2 Threading — For I/O-Bound Tasks</h3>
+<div class="analogy">Threading is perfect for waiting tasks. When one thread is waiting for a website to respond, it releases the GIL, and another thread can start its request. All three requests are "in flight" simultaneously, even though only one Python thread is actively running at any instant.</div>
+
+<div class="pycode">import threading
+
+def fetch(url, results):
+    import requests
+    results[url] = requests.get(url, timeout=10).status_code
+
+urls = ["https://example.com", "https://example.org", "https://example.net"]
+results = {}
+
+threads = []
+for url in urls:
+    t = threading.Thread(target=fetch, args=(url, results))
+    t.start()
+    threads.append(t)
+
+for t in threads:
+    t.join()  # Wait for all to finish
+
+print(results)
+
+# Lock for shared data
+lock = threading.Lock()
+with lock:
+    # Only one thread can run this block at a time
+    shared_counter += 1</div>
+
+<h3>11.3 Multiprocessing — For CPU-Bound Tasks</h3>
+<div class="analogy">Multiprocessing creates separate processes instead of threads. Each process has its own Python interpreter and its own GIL, so they truly run in parallel on multiple CPU cores. It's like having separate rooms, each with its own microphone.</div>
+
+<div class="pycode">from multiprocessing import Pool
+import math
+
+def is_prime(n):
+    if n < 2: return False
+    for i in range(2, int(math.sqrt(n)) + 1):
+        if n % i == 0: return False
+    return True
+
+numbers = range(100000, 101000)
+
+# Single process: slow
+# results = [is_prime(n) for n in numbers]
+
+# Multiple processes: fast! Uses all CPU cores
+if __name__ == "__main__":  # Required on Windows/Mac!
+    with Pool(4) as pool:
+        results = pool.map(is_prime, numbers)</div>
+
+<table>
+<tr><th>Aspect</th><th>Threading</th><th>Multiprocessing</th></tr>
+<tr><td>Memory</td><td>Shared memory (light)</td><td>Separate memory (heavy)</td></tr>
+<tr><td>Communication</td><td>Fast (shared variables)</td><td>Slow (pickling/unpickling)</td></tr>
+<tr><td>CPU cores</td><td>One at a time (GIL)</td><td>True parallel execution</td></tr>
+<tr><td>Best for</td><td>I/O-bound (network, files)</td><td>CPU-bound (math, processing)</td></tr>
+<tr><td>Start time</td><td>Fast</td><td>Slower</td></tr>
+</table>
+
+<h3>11.4 Asyncio — The Modern Way for I/O</h3>
+<div class="analogy">Asyncio is like a chef who can cook multiple dishes simultaneously. Instead of waiting for one dish to finish before starting another, the chef starts cooking, and when that dish needs to simmer (wait for I/O), the chef starts another dish. The chef never stands idle.</div>
+
+<div class="pycode">import asyncio
+
+async def fetch_data(url):
+    print(f"Starting {url}")
+    await asyncio.sleep(1)  # Simulates a network request — NON-BLOCKING!
+    print(f"Finished {url}")
+    return f"Data from {url}"
+
+async def main():
+    # Create multiple tasks that run "concurrently"
+    tasks = [
+        asyncio.create_task(fetch_data("site1.com")),
+        asyncio.create_task(fetch_data("site2.com")),
+        asyncio.create_task(fetch_data("site3.com")),
+    ]
+    
+    # Wait for all tasks to complete
+    results = await asyncio.gather(*tasks)
+    print(results)
+
+asyncio.run(main())</div>
+
+<p><strong>How asyncio works:</strong></p>
+<ol>
+<li>When a task hits <code>await</code>, it pauses and returns control to the event loop</li>
+<li>The event loop checks if any other task is ready to run</li>
+<li>If another task is ready, it runs that task</li>
+<li>When the first task's awaited operation completes, the event loop resumes it</li>
+</ol>
+
+<div class="note">Key difference from threading: Threading is preemptive (OS decides when to switch). Asyncio is cooperative (tasks explicitly yield with await). Asyncio tasks don't interrupt each other, so no locks are needed!</div>
+
+<table>
+<tr><th>Scenario</th><th>Use</th></tr>
+<tr><td>Downloading many files/web pages</td><td>asyncio or threading</td></tr>
+<tr><td>Heavy calculations (math, image processing)</td><td>multiprocessing</td></tr>
+<tr><td>Running background tasks with a GUI</td><td>threading</td></tr>
+<tr><td>High-performance web server</td><td>asyncio (FastAPI, aiohttp)</td></tr>
+<tr><td>Simple scripts</td><td>Just use a loop — don't overcomplicate!</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h1>12. Testing & Profiling</h1>
+
+<h3>12.1 Unit Testing with unittest</h3>
+<div class="pycode">import unittest
+
+class TestMathOperations(unittest.TestCase):
+    def setUp(self):
+        """Runs before EACH test method."""
+        self.numbers = [1, 2, 3, 4, 5]
+    
+    def tearDown(self):
+        """Runs after EACH test method."""
+        pass
+    
+    def test_sum(self):
+        self.assertEqual(sum(self.numbers), 15)
+    
+    def test_max(self):
+        self.assertEqual(max(self.numbers), 5)
+    
+    def test_raises_error(self):
+        with self.assertRaises(ZeroDivisionError):
+            1 / 0
+    
+    def test_almost_equal(self):
+        self.assertAlmostEqual(0.1 + 0.2, 0.3, places=7)
+
+if __name__ == "__main__":
+    unittest.main()</div>
+
+<h3>12.2 pytest — The Modern Way</h3>
+<div class="pycode"># pytest is more powerful and readable than unittest
+
+def test_sum():
+    assert sum([1, 2, 3]) == 6
+
+def test_division_by_zero():
+    with pytest.raises(ZeroDivisionError):
+        1 / 0
+
+# Fixtures — reusable setup
+@pytest.fixture
+def sample_data():
+    return [1, 2, 3, 4, 5]
+
+def test_sum_with_fixture(sample_data):
+    assert sum(sample_data) == 15
+
+# Parametrize — run the same test with different inputs
+@pytest.mark.parametrize("a,b,expected", [
+    (1, 2, 3),
+    (5, 5, 10),
+    (-1, 1, 0),
+])
+def test_add(a, b, expected):
+    assert a + b == expected</div>
+
+<div class="tip">pytest is the modern standard for Python testing. It's simpler than unittest, has powerful fixtures, and makes tests read like plain English. Install with: pip install pytest</div>
+
+<h3>12.3 Profiling — Finding Slow Code</h3>
+<div class="pycode">import cProfile
+import pstats
+
+# Profile a function
+cProfile.run("sum(range(1000000))")
+
+# Save detailed stats for analysis
+profiler = cProfile.Profile()
+profiler.enable()
+# ... your code here ...
+profiler.disable()
+
+stats = pstats.Stats(profiler)
+stats.sort_stats("cumtime")  # Sort by cumulative time
+stats.print_stats(20)        # Print top 20 functions</div>
+
+<p><strong>How to read profiler output:</strong></p>
+<ul>
+<li><strong>ncalls:</strong> Number of times the function was called</li>
+<li><strong>tottime:</strong> Time spent in the function itself (excluding sub-calls)</li>
+<li><strong>cumtime:</strong> Time spent in the function + all sub-calls it made</li>
+<li><strong>Focus on:</strong> Functions with high cumtime that you wrote (not library functions)</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h1>13. Design Patterns in Python</h1>
+
+<h3>13.1 Singleton — One Instance Only</h3>
+<div class="analogy">A singleton is like a single president of a country. There can only be one at any time. Use it when exactly one instance should exist (database connection pool, configuration manager).</div>
+
+<div class="pycode">class Singleton:
+    _instance = None
+    
+    def __new__(cls):
+        if cls._instance is None:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
+a = Singleton()
+b = Singleton()
+print(a is b)  # True — same object!</div>
+
+<h3>13.2 Factory — Creating Objects Without Specifying Exact Class</h3>
+<div class="analogy">A factory is like a vending machine. You press a button ("dog"), and the machine gives you a dog object. You don't need to know the exact class name or how it's created.</div>
+
+<div class="pycode">class Dog: pass
+class Cat: pass
+class Bird: pass
+
+class AnimalFactory:
+    @staticmethod
+    def create(animal_type):
+        animals = {"dog": Dog, "cat": Cat, "bird": Bird}
+        if animal_type not in animals:
+            raise ValueError(f"Unknown animal: {animal_type}")
+        return animals[animal_type]()
+
+pet = AnimalFactory.create("dog")
+print(type(pet))  # &lt;class '__main__.Dog'&gt;</div>
+
+<h3>13.3 Observer — Publish-Subscribe Pattern</h3>
+<div class="analogy">The observer pattern is like a WhatsApp group. One person sends a message (publishes), and everyone in the group receives it (subscribes). Use it when one object needs to notify many others of state changes.</div>
+
+<div class="pycode">class Subject:
+    def __init__(self):
+        self._observers = []
+    
+    def attach(self, observer):
+        self._observers.append(observer)
+    
+    def detach(self, observer):
+        self._observers.remove(observer)
+    
+    def notify(self, message):
+        for observer in self._observers:
+            observer.update(message)
+
+class EmailAlert:
+    def update(self, message):
+        print(f"Email: {message}")
+
+class SMSAlert:
+    def update(self, message):
+        print(f"SMS: {message}")
+
+# Usage
+system = Subject()
+system.attach(EmailAlert())
+system.attach(SMSAlert())
+system.notify("Server is down!")
+# Email: Server is down!
+# SMS: Server is down!</div>
+
+<div class="page-break"></div>
+
+<h1>14. NumPy Deep Dive</h1>
+
+<h3>14.1 Why NumPy is Fast — Memory Layout</h3>
+<div class="analogy">Python lists are like a bookshelf with each book in a different room. To read a series, you have to run around the building. NumPy arrays are like a library shelf with all books in a row — you can grab them instantly.</div>
+
+<p>Python lists store <strong>pointers</strong> to objects. Each element is a separate Python object with its own memory overhead (type info, reference count, etc.). A list of 1000 integers contains 1000 pointers, each pointing to a separate integer object.</p>
+
+<p>NumPy arrays store <strong>raw data</strong> in a contiguous block of memory. All elements are the same type (e.g., 64-bit integers), stored one after another like a C array. This means:</p>
+<ul>
+<li>Less memory overhead (no per-object type info)</li>
+<li>CPU cache efficiency (elements are next to each other)</li>
+<li>Vectorized operations (process many elements in one CPU instruction)</li>
+</ul>
+
+<table>
+<tr><th></th><th>Python List</th><th>NumPy Array</th></tr>
+<tr><td>1,000,000 integers</td><td>~28 MB</td><td>~8 MB</td></tr>
+<tr><td>Storage</td><td>Pointer to objects</td><td>Raw contiguous data</td></tr>
+<tr><td>Speed</td><td>Python loop (slow)</td><td>C vectorized (fast)</td></tr>
+</table>
+
+<h3>14.2 Broadcasting — The Rules</h3>
+<div class="analogy">Broadcasting is like a teacher saying "Everyone gets 5 bonus marks!" The teacher doesn't tell each student individually. The +5 operation automatically applies to everyone, even though the class has 30 students and 5 is just one number.</div>
+
+<p><strong>Broadcasting Rules:</strong></p>
+<ol>
+<li>Compare dimensions from trailing (right) to leading (left)</li>
+<li>Two dimensions are compatible if they are equal, or one of them is 1</li>
+<li>If dimensions don't match and neither is 1, it's an error</li>
+</ol>
+
+<div class="pycode">import numpy as np
+
+a = np.array([1, 2, 3])           # shape (3,)
+b = np.array([[1], [2]])          # shape (2, 1)
+print(a + b)
+# [[2 3 4]                        (2, 3) result!
+#  [3 4 5]]
+
+# Visualizing dimensions:
+# Array A: shape (3,)       →  (1, 3)     →  (2, 3)
+# Array B: shape (2, 1)     →  (2, 1)     →  (2, 3)
+# Result:   shape (2, 3)
+
+# Practical: center each row by its mean!
+matrix = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+row_means = matrix.mean(axis=1, keepdims=True)  # shape (3, 1)
+print(matrix - row_means)  # Each row is centered around 0!</div>
+
+<h3>14.3 Views vs Copies — The NumPy Trap</h3>
+<div class="analogy">A view is like looking at the same room through a different window. A copy is like building a completely identical room next door. If you paint the wall in the original room, the view sees it, but the copy doesn't!</div>
+
+<div class="pycode">arr = np.array([1, 2, 3, 4, 5])
+
+# Slicing creates a VIEW (shares memory!)
+slice_view = arr[1:4]
+slice_view[0] = 999
+print(arr)              # [1 999 3 4 5] ← Original changed! 😱
+
+# .copy() creates a COPY (independent memory)
+slice_copy = arr[1:4].copy()
+slice_copy[0] = 111
+print(arr)              # [1 999 3 4 5] ← Original unchanged! ✅
+
+# Check if it's a view
+print(slice_view.base is arr)  # True — it's a view
+print(slice_copy.base is arr)  # False — it's a copy
+
+# ravel creates a VIEW, flatten creates a COPY
+matrix = np.array([[1, 2], [3, 4]])
+raveled = matrix.ravel()          # View (fast, shares memory)
+flattened = matrix.flatten()      # Copy (safe, independent)</div>
+
+<div class="warn">If you slice a NumPy array and modify the slice, the original array ALSO changes! Use .copy() whenever you need to modify a slice independently.</div>
+
+<h3>14.4 Advanced Indexing — Boolean & Fancy</h3>
+<div class="pycode">arr = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# Boolean indexing: creates a COPY with selected elements
+selected = arr[arr > 5]  # [6, 7, 8, 9, 10] — COPY, not view!
+
+# Can also assign through boolean mask:
+arr[arr > 5] = 0  # [1, 2, 3, 4, 5, 0, 0, 0, 0, 0]
+
+# Fancy indexing (integer arrays): also creates a COPY!
+selected = arr[[0, 2, 4, 6, 8]]  # [1, 3, 5, 7, 9] — COPY!
+
+# IMPORTANT DISTINCTION:
+# arr[1:4] (slicing)     → VIEW (shares memory)
+# arr[[1,2,3]] (fancy)   → COPY (new memory)
+# arr[mask] (boolean)    → COPY (new memory)</div>
+
+<div class="tip">Use .base to check if an array is a view. If arr.base is not None, it's a view of another array. Modifying it modifies the original!</div>
+
+<div class="page-break"></div>
+
+<h1>15. Pandas Deep Dive</h1>
+
+<h3>15.1 How Pandas Stores Data — Block Manager</h3>
+<p>Pandas stores each column in a separate NumPy array. This is called <strong>columnar storage</strong>. It means:</p>
+<ul>
+<li>Operations on a single column are fast (contiguous memory)</li>
+<li>Operations on rows are slower (must jump between columns)</li>
+<li>Columns of the same type can be stored efficiently</li>
+<li>Missing values are handled using a special mask (NaN for floats, NaT for dates, NA for newer nullable types)</li>
+</ul>
+
+<h3>15.2 Index — The Hidden Power</h3>
+<div class="analogy">The index is not just row labels — it's a powerful lookup structure. Pandas uses hash tables for unique indexes and sorted search trees for sorted indexes. Setting a meaningful index makes lookups incredibly fast.</div>
+
+<div class="pycode">import pandas as pd
+
+df = pd.DataFrame({"A": [1, 2, 3]}, index=["x", "y", "z"])
+df.loc["y"]  # Fast hash lookup if index is unique!
+
+# MultiIndex creates hierarchical tables
+df = pd.DataFrame(
+    {"sales": [100, 200, 150, 250]},
+    index=pd.MultiIndex.from_tuples(
+        [("2024", "Q1"), ("2024", "Q2"), ("2025", "Q1"), ("2025", "Q2")],
+        names=["year", "quarter"]
+    )
+)
+print(df.loc["2024"])  # Select all 2024 rows — fast!</div>
+
+<h3>15.3 Categorical Data — Save Memory</h3>
+<div class="analogy">When a column has repeated strings (like "Male"/"Female", country names, product categories), storing them as object dtype is like writing the full word "Male" on every row instead of using a checkbox (M). Categorical dtype uses integer codes — much more efficient!</div>
+
+<div class="pycode">df = pd.DataFrame({"color": ["red", "blue", "green"] * 100000})
+print(df["color"].memory_usage(deep=True))  # ~2.4 MB
+
+df["color"] = df["color"].astype("category")
+print(df["color"].memory_usage(deep=True))  # ~100 KB — 24x smaller!
+
+# What happens internally?
+# Pandas stores unique values once: ['blue', 'green', 'red'] (categories)
+# Then stores integer codes: [2, 0, 1, 2, 0, 1, ...]
+# It's like a dictionary lookup: 0→"blue", 1→"green", 2→"red"</div>
+
+<h3>15.4 GroupBy — What Actually Happens</h3>
+<p>When you call <code>df.groupby("column")</code>, Pandas doesn't immediately do any calculation. It creates a <strong>GroupBy object</strong> — a lazy iterator over groups. The actual computation happens when you call <code>.sum()</code>, <code>.mean()</code>, etc.</p>
+
+<p><strong>The Split-Apply-Combine process:</strong></p>
+<ol>
+<li><strong>Split</strong>: Pandas partitions the data into groups based on the group key</li>
+<li><strong>Apply</strong>: For each group, it applies the aggregation function (sum, mean, custom function)</li>
+<li><strong>Combine</strong>: It combines the results back into a single DataFrame or Series</li>
+</ol>
+
+<div class="pycode"># Behind the scenes, groupby does this:
+for group_name, group_df in df.groupby("company"):
+    # group_df is a DataFrame containing only that company's rows
+    result = group_df["sales"].sum()  # Apply
+    # Combine into final result...</div>
+
+<h3>15.5 Merge — Join Algorithms</h3>
+<p>Pandas uses different algorithms for merges depending on the situation:</p>
+<ul>
+<li><strong>One-to-one merge</strong>: Both keys are unique. Fast and simple.</li>
+<li><strong>Many-to-one merge</strong>: Left key has duplicates, right key is unique. Uses a hash table.</li>
+<li><strong>Many-to-many merge</strong>: Both keys have duplicates. This is the slowest because it creates a Cartesian product for matching keys.</li>
+</ul>
+
+<div class="tip">Tips for fast merges: (1) Set the join column as the index on both DataFrames, then use .join(). (2) Sort both DataFrames by the join key before merging. (3) Use validate="1:1" or "m:1" to catch unexpected duplicates early.</div>
+
+<h3>15.6 Time Series — Resampling Internals</h3>
+<div class="pycode">df = pd.DataFrame(
+    {"value": range(100)},
+    index=pd.date_range("2024-01-01", periods=100, freq="H")
+)
+
+# Resampling creates a new DateTimeIndex with the desired frequency
+# and then aggregates values within each bin
+monthly = df.resample("M").sum()
+# "M" means Month End. It creates bins: [Jan 1-31, Feb 1-28, ...]
+# Then sums all values in each bin.
+
+# Rolling window is a sliding window over the data
+rolling = df.rolling(window=24).mean()
+# For each point, it looks at the previous 24 hours (including current)
+# and calculates the mean. The first 23 values will be NaN.
+
+# Expanding window grows from the start
+expanding = df.expanding().mean()
+# Point 0: mean of [0]
+# Point 1: mean of [0, 1]
+# Point 2: mean of [0, 1, 2]
+# ...
+
+# Exponentially weighted moving average (EWMA)
+ewm = df.ewm(span=24).mean()
+# Recent values are weighted more heavily than older values.
+# Smaller span = more responsive to recent changes (more volatile).
+# Larger span = smoother (more stable).</div>
+
+<h3>15.7 eval() and query() — Speeding Up Large DataFrames</h3>
+<div class="analogy">For DataFrames with millions of rows, normal Python operations are like doing math on a calculator — one step at a time. eval() and query() use the numexpr library, which is like a supercomputer that processes millions of operations in one go using C code.</div>
+
+<div class="pycode"># Slow for large DataFrames: pure Python loops over rows
+df["C"] = df["A"] + df["B"] * df["C"]
+
+# Fast: uses numexpr (C implementation)
+df.eval("C = A + B * C", inplace=True)
+
+# query() filters using numexpr
+# Slow: df[df["A"] > 0 & df["B"] < 10]
+# Fast: df.query("A > 0 and B < 10")
+
+# Limitations:
+# - Only works with numeric columns
+# - Can't use arbitrary Python functions (only basic operations)
+# - Requires the numexpr library installed</div>
+
+<h3>15.8 Nullable Dtypes — The Modern Way</h3>
+<div class="analogy">Traditional missing data in Pandas uses NaN for floats, but there's no integer NaN in NumPy. So integers with missing values were converted to float64 — losing precision! Nullable dtypes (Int64, boolean, string) fix this.</div>
+
+<div class="pycode"># Old way: integers turn into float64 when NaN is added!
+df = pd.DataFrame({"A": [1, 2, None]})
+print(df["A"].dtype)  # float64! Integer turned into float because of None. 😱
+
+# New way: nullable integer stays as integer!
+df = pd.DataFrame({"A": pd.array([1, 2, None], dtype="Int64")})
+print(df["A"].dtype)  # Int64 (capital I = nullable) ✅
+
+# Other nullable dtypes
+pd.array([1.0, 2.0, None], dtype="Float64")   # Nullable float
+pd.array([True, False, None], dtype="boolean") # Nullable bool
+pd.array(["a", "b", None], dtype="string")     # Nullable string
+
+# pd.NA works across all nullable types
+print(pd.isna(pd.NA))     # True
+print(pd.isna(pd.NaT))    # True (Not a Time)</div>
+
+<div class="tip">Nullable dtypes keep integers as integers (no precision loss), booleans as true three-state values (True, False, or NA), and provide a consistent pd.NA missing value across all types.</div>
+
+<div class="page-break"></div>
+
+<h1>Final Advice: How to Become a Python Expert</h1>
+
+<div class="tip">
+<ol>
+<li><strong>Master the basics first</strong> — Don't rush to advanced topics. If you don't understand loops, functions, and lists deeply, decorators and metaclasses will confuse you.</li>
+<li><strong>Build projects</strong> — Theory without practice is like watching swimming videos without getting in the water. Build something real, even if it's simple.</li>
+<li><strong>Read other people's code</strong> — GitHub is the best teacher. Read popular Python libraries. See how experts structure their code.</li>
+<li><strong>Write tests from day one</strong> — Testing isn't just for professionals. Even simple scripts benefit from test cases. It teaches you to think about edge cases.</li>
+<li><strong>Learn to use a debugger</strong> — Don't just add print() statements. Learn pdb or your IDE's debugger. Step through code line by line to understand flow.</li>
+<li><strong>Profile before optimizing</strong> — Don't guess what's slow. Measure it. Use cProfile or timeit. Often the slow part is not what you expect.</li>
+<li><strong>Write documentation</strong> — Explain your code to yourself. If you can't explain it simply, you don't understand it well enough.</li>
+<li><strong>Join the community</strong> — Stack Overflow, Reddit r/learnpython, Python Discord, local meetups. Teaching others is the best way to solidify your own knowledge.</li>
+<li><strong>Contribute to open source</strong> — Find a small bug or documentation typo in a library you use. Submit a pull request. This teaches you real-world coding practices.</li>
+<li><strong>Stay curious</strong> — Python evolves constantly. New features are added regularly. Keep learning.</li>
+</ol>
+</div>
+
+<div class="note">
+<strong>Remember:</strong> Every expert was once a beginner. The difference is that they kept coding, kept breaking things, kept fixing them, and never stopped learning. You've got this! 🚀
+</div>
+
+<p style="text-align:center;font-size:32px;font-family:'Caveat',cursive;margin-top:60px;color:#c0392b;">
+Happy Coding! 🚀<br>
+<small style="font-size:18px;color:#7f8c8d;">— Your Advanced Python Notes</small>
+</p>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a07938d06cbc0de6',t:'MTc4MDc2NzgzMw=='};var a=document.createElement('script');a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
